@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --main-bg-color: #f8f8f8;
+  --white: #ffffff;
+  --secondary-bg-color: #0ee4ce;
+  --main-color: #1d2224;
+  --secondary-color: #52748f;
+  --third-color: #1f284b;
+  --shadow-color: #7fa0ba;
+  --hover-color: rgba(187, 195, 201, 0.5);
+  --warning-color: #fa5c8e;
+  --warning-hover-color: rgba(250, 92, 142, 0.5);
+}
+
+body {
+  background-image: url("../assets/14710.jpg");
+  background-size: contain;
+  color: var(--main-color);
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.search-input:focus .search-icon {
+  fill: var(--white);
+}
+
+.show-sidebar {
+  right: 0;
+}
+
+.category-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  height: 1px;
+  width: 0;
+  background-color: var(--third-color);
+  transform-origin: bottom left;
+  transition: all 200ms ease-out;
+}
+
+.category-link__cont:hover .category-link::after {
+  width: 100%;
+  transform-origin: bottom right;
+}
+
+@media (min-width: 640px) {
+  .profile-navbar-height {
+    height: calc(100vh - 82px)
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
