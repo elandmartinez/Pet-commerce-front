@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* css variables, usable on any class of the traditional css of this project */
 :root {
   --main-bg-color: #f8f8f8;
   --white: #ffffff;

@@ -23,10 +23,12 @@ function SignUp () {
           setValues,
           isSubmitting,
         }) => (
+
           <Form
             className="relative top-[10%] lg:top-[5%] bg-white flex flex-col items-center justify-evenly text-thirdColor mx-auto py-8 px-8 min-h-[350px] w-[85%] max-w-[350px] lg:max-w-[400px] shadow-2xl shadow-shadowColor border border-secondaryBgColor rounded-2xl"
           >
             <h2 className="mb-6 text-3xl text-thirdColor">Sign up</h2>
+
             <div className="my-1 w-full">
               <TextField className="w-full" name="name" type="name" label="name" variant="standard"
                 onChange={(e) => {
@@ -36,6 +38,7 @@ function SignUp () {
               />
               <ErrorMessage name="name" component="div" className="mt-1 text-warningColor"/>
             </div>
+
             <div className="my-1 w-full">
               <TextField className="w-full" name="email" type="email" label="email" variant="standard"
                 onChange={(e) => {
@@ -45,6 +48,7 @@ function SignUp () {
               />
               <ErrorMessage name="email" component="div" className="mt-1 text-warningColor"/>
             </div>
+
             <div className="my-1 w-full">
               <TextField className="w-full" name="password" type="password" label="password" variant="standard"
                 onChange={(e) => {
@@ -54,6 +58,7 @@ function SignUp () {
               />
               <ErrorMessage name="password" component="div" className="mt-1 text-warningColor"/>
             </div>
+            
             <div className="my-1 w-full">
               <TextField className="w-full" name="repeat_password" type="repeat_password" label="Repeat password" variant="standard"
                 onChange={(e) => {
@@ -72,14 +77,14 @@ function SignUp () {
               </Link>
             </div>
 
-            <Button
-              variant="contained"
+            <button
               type="submit"
-              className={`w-24 p-2 mt-[20px] bg-secondaryBgColor rounded-lg text-thirdColor font-bold text-lg`}
+              className="w-24 p-2 mt-2 bg-secondaryBgColor rounded-lg text-thirdColor font-bold text-lg
+                hover:bg-thirdColor hover:text-secondaryBgColor transition-all"
               disabled={isSubmitting}
             >
               Sign up
-            </Button>
+            </button>
           </Form>
         )}
       </Formik>

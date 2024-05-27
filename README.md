@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## About routing throug files organization
+
+the folders inmediatly below the folde "app" are pages, the render when putted in the url  just as they appear on the files, for exmple the login folder is rendered when the url is "/login"
+
+the "components" folder is not a page, just an internal folder, not represented through the url of the website.
+
+for a folder below the app directory to be represented as a page throught the url it must have a file child named "page" and that file will be the component rendered. 

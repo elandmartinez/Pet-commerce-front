@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -21,12 +20,16 @@ export default function NavMenuModal() {
   };
 
   return (
+    //clickaway listener component used from mui
     <ClickAwayListener onClickAway={handleClickAway}>
-      <div className=''>
+      <div>
+
+        {/* button that activates the menu */}
         <Button
           onClick={handleClick}
           variant='outlined'
           className='menu-button'
+          /* this is the way to apply overwritting styles to mui components */
           sx={{
             minWidth: 40,
             minHeight: 40,
@@ -45,8 +48,11 @@ export default function NavMenuModal() {
             }
           }
         >
+          {/* Icon of the button that activates the menu */}
           <PersonIcon/>
         </Button>
+
+        {/* the menu cont */}
         <nav
           className={`profile-navbar-height absolute -right-[200px] top-[100%] w-[180px] sm:w-[200px] bg-mainBgColor transition-all
            border-l border-b border-shadowColor shadow-xl ${showSideBar ? "show-sidebar" : ""}`} 
@@ -86,6 +92,7 @@ export default function NavMenuModal() {
             </li>
           </ul>
         </nav>
+        
       </div>
     </ClickAwayListener>
   );
