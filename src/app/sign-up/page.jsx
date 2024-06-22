@@ -1,18 +1,23 @@
 'use client'
 
 import { Formik, ErrorMessage, Form } from "formik"
-import { signUpFormInitialValues } from "../../utils/constants";
-import { signUpSchema } from "@/utils/schemas";
+import { SIGN_UP_FORM_INITIAL_VALUES } from "../../utils/constants";
+import { SIGN_UP_SCHEMA } from "@/utils/schemas";
 import Link from "next/link"
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+//implement a way to store data locally, could be redux or something else, check possible libraries
+//make the log user function happen when sending valid credentials
+//update the local user.authenticated to true and user.role
+//then app should only allow user to stay on authenticated pages until user signs out. 
 function SignUp () {
+
+
   return (
     <div className="relative top-0 z-20 login-page w-full h-[78%] lg:h-[70%] flex items-center lg:text-lg">
       <Formik
-        initialValues={signUpFormInitialValues}
-        validationSchema={signUpSchema}
+        initialValues={SIGN_UP_FORM_INITIAL_VALUES}
+        validationSchema={SIGN_UP_SCHEMA}
         onSubmit={(values, {setSubmitting}) => {
           console.log({values})
           setSubmitting(false)

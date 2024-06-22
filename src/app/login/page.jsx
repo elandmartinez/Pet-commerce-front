@@ -1,25 +1,52 @@
 'use client'
 
 import { Formik, Form, ErrorMessage } from "formik"
-import { loginFormInitialValues } from "../../utils/constants";
-import { loginSchema } from "@/utils/schemas";
+import { LOGIN_FORM_INITAL_VALUES, ROUTES } from "../../utils/constants";
+import { LOGIN_SCHEMA } from "@/utils/schemas";
 import Link from "next/link"
 import TextField from '@mui/material/TextField';
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../lib/store/slices/userSlice";
+import { authUser } from "@/services/userService";
+import { useRouter } from "next/navigation";
 
+//create a services function that contains all the fetching functions
 //in this component we use a library for handling the form workflow, the library is formik
 
 function Login () {
+  const router = useRouter()
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  console.log({user})
+
+  const logUser = async (credentials) => {
+    try {
+      const res = await authUser(credentials)
+
+      return res
+
+    } catch (error) {
+      throw new Error("Returned error when trying to authenticate user")
+    }
+  }
+
   return (
     <div className="relative top-0 z-20 login-page h-[78%] lg:h-[70%] w-full flex items-start lg: pt-28 lg:text-lg">
 
       {/* formik form cont where whe handle several aspects of the form like validation of the fields
       initial values, y the onSubmit function */}
       <Formik
-        initialValues={loginFormInitialValues}
-        validationSchema={loginSchema}
-        onSubmit={(values, {setSubmitting}) => {
-          console.log({values})
+        initialValues={LOGIN_FORM_INITAL_VALUES}
+        validationSchema={LOGIN_SCHEMA}
+        onSubmit={async (values, {setSubmitting}) => {
           setSubmitting(false)
+          const credentials = {username: "eland", password: "admin123"}
+          const res = await logUser(credentials)
+          dispatch(updateUser({
+            ...credentials,
+            ...res
+          }))
+          router.push(ROUTES.DASHBOARD)
         }}
       >
         {({

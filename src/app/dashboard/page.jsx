@@ -1,14 +1,18 @@
 "use client"
 
 import { Pacifico } from "next/font/google";
+import { useSelector } from "react-redux";
 
 const pacifico = Pacifico({
   weight: ["400"],
   subsets: ["latin"]
 })
 
-
 export default function Dashboard () {
+  const user = useSelector((state) => state.user.value)
+
+  console.log({user})
+
   return (
     <main className="w-full h-full flex flex-col items-center">
       <div className={`${pacifico.className} text-thirdColor text-[30px] mt-10 text-center`} >

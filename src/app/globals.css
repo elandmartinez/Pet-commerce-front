@@ -13,13 +13,15 @@
   --third-color: #1f284b;
   --shadow-color: #7fa0ba;
   --hover-color: rgba(187, 195, 201, 0.5);
+  --background-transparent-gray: rgba(187, 195, 201, 0.5);
   --warning-color: #fa5c8e;
   --warning-hover-color: rgba(250, 92, 142, 0.5);
 }
 
 body {
-  background-image: url("../assets/14710.jpg");
-  background-size: contain;
+  /* background-image: url("../assets/14710.jpg");
+  background-size: contain; */
+  background-color: var(--main-bg-color);
   color: var(--main-color);
   width: 100vw;
   max-width: 100vw;
