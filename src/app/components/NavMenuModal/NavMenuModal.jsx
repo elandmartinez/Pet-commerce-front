@@ -22,7 +22,7 @@ export default function NavMenuModal() {
   return (
     //clickaway listener component used from mui
     <ClickAwayListener onClickAway={handleClickAway}>
-      <div>
+      <div className="md:mt-[20px]">
 
         {/* button that activates the menu */}
         <Button
@@ -92,7 +92,6 @@ export default function NavMenuModal() {
             </li>
           </ul>
         </nav>
-        
       </div>
     </ClickAwayListener>
   );

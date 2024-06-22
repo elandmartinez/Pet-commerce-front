@@ -17,7 +17,7 @@ const pacifico = Pacifico({
 
 function AuthPageNavbar (){
   return (
-    <div className={`bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>
+    <div className={` bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>
       {/* logo container, it has the logo and the title of it */}
       <div className="relative top-[2px] flex flex-col items-center text-[12px]">  
         <img
@@ -43,7 +43,7 @@ function AuthPageNavbar (){
           />
         </div>
 
-        {/* nav container */}
+        {/* nav links container */}
         <nav className={`${pacifico.className} hidden w-full sm:flex text-sm pt-3 pb-1 px-1`}>
 
           {/* nav links */}

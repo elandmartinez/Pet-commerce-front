@@ -22,6 +22,7 @@ module.exports = {
       thirdColor: "var(--third-color)",
       shadowColor: "var(--shadow-color)",
       hoverColor: "var(--hover-color)",
+      backgroundTransparentGray: "var(--background-transparent-gray)",
       warningColor: "var(--warning-color)",
       warningHoverColor: "var(--warning-hover-color)",
       white: 'var(--white)'
