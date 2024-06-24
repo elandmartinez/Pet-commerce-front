@@ -6,7 +6,6 @@ export const LOGIN_FORM_INITAL_VALUES = {
 }
 
 export const SIGN_UP_FORM_INITIAL_VALUES = {
-export const SIGN_UP_FORM_INITIAL_VALUES = {
   name: "",
   email: "",
   password: "",

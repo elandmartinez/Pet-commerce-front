@@ -3,8 +3,6 @@
 import { Formik, ErrorMessage, Form } from "formik"
 import { SIGN_UP_FORM_INITIAL_VALUES } from "../../utils/constants";
 import { SIGN_UP_SCHEMA } from "@/utils/schemas";
-import { SIGN_UP_FORM_INITIAL_VALUES } from "../../utils/constants";
-import { SIGN_UP_SCHEMA } from "@/utils/schemas";
 import Link from "next/link"
 import TextField from '@mui/material/TextField';
 import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
