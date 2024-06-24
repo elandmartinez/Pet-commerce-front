@@ -8,12 +8,6 @@ export const userSlice = createSlice({
   initialState: userSliceInitialValue,
   reducers: {
     updateUser: (userState, action) => {
-      console.log({userState})
-      /* userState.username = action.payload.username;
-      userState.password = action.payload.password;
-      userState.token = action.payload.token; */
-      console.log("updating user", {state: userState, action})
-
       return {
         ...action.payload
       }

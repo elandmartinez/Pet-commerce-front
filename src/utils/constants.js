@@ -1,7 +1,5 @@
 "use client"
 
-import SignUp from "@/app/sign-up/page"
-
 export const LOGIN_FORM_INITAL_VALUES = {
   email: "",
   password: ""
@@ -17,7 +15,7 @@ export const SIGN_UP_FORM_INITIAL_VALUES = {
 // url routes
 
 export const ROUTES = {
-  LOGIN: "/loging",
+  LOGIN: "/login",
   SIGN_UP: "/sign-up",
   DASHBOARD: "/dashboard",
   PROFILE: "/profile",
@@ -51,4 +49,5 @@ export const FETCH_METHODS = {
 
 export const BASE_ENDPOINT = "http://localhost:8080/api"
 
-export const NO_AUTH_REQUIRED_PAGES = ['/login', '/sign-up']
+export const AUTH_REQUIRED_PAGES = ["/dashboard", "/profile", "/my-shoppings", "/shopping-cart"]
+export const NO_AUTH_REQUIRED_PAGES = ["/login", "sign-up"]

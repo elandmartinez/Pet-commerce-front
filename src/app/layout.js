@@ -1,7 +1,7 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/NavBar/Navbar";
 import ReduxProvider from "@/lib/provider/index";
+import AuthPageManager from "./middlewareComponents/AuthPageManager";
 
 //here we obtain the roboto font and specify the weight, styles,
 //and subsets that we want to get it with
@@ -23,9 +23,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${roboto.className} relative bg-mainBgColor text-mainColor`}>
         <ReduxProvider>
-          {/* the navbar component goes above all the other component rendering no matter what page is */}
-          <Navbar />
-          {children}
+          <AuthPageManager>
+            {/* the navbar component goes above all the other component rendering no matter what page is */}
+            {children}
+          </AuthPageManager>
         </ReduxProvider>
       </body>
     </html>

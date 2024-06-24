@@ -2,6 +2,7 @@
 
 import { Pacifico } from "next/font/google";
 import { useSelector } from "react-redux";
+import AuthPageNavbar from "../components/AuthPageNavbar/AuthPageNavbar";
 
 const pacifico = Pacifico({
   weight: ["400"],
@@ -9,16 +10,17 @@ const pacifico = Pacifico({
 })
 
 export default function Dashboard () {
-  const user = useSelector((state) => state.user.value)
-
-  console.log({user})
+  const user = useSelector((state) => state.user)
 
   return (
-    <main className="w-full h-full flex flex-col items-center">
-      <div className={`${pacifico.className} text-thirdColor text-[30px] mt-10 text-center`} >
-        <h1 className="text-[30px] mb-6" >What does your pet need today?</h1>
-        <h2 className="text-[20px]" >We have for you...</h2>
-      </div>
-    </main>
+    <>
+      <AuthPageNavbar />
+      <main className="w-full h-full flex flex-col items-center">
+        <div className={`${pacifico.className} text-thirdColor text-[30px] mt-10 text-center`} >
+          <h1 className="text-[30px] mb-6" >What does your pet need today?</h1>
+          <h2 className="text-[20px]" >We have for you...</h2>
+        </div>
+      </main>
+    </>
   )
 }

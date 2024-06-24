@@ -9,15 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../lib/store/slices/userSlice";
 import { authUser } from "@/services/userService";
 import { useRouter } from "next/navigation";
+import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
 
 //create a services function that contains all the fetching functions
 //in this component we use a library for handling the form workflow, the library is formik
 
 function Login () {
   const router = useRouter()
-  const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  console.log({user})
 
   const logUser = async (credentials) => {
     try {
@@ -31,87 +30,91 @@ function Login () {
   }
 
   return (
-    <div className="relative top-0 z-20 login-page h-[78%] lg:h-[70%] w-full flex items-start lg: pt-28 lg:text-lg">
+    <>
+      <NonAuthPageNavbar /> 
+      <div className="relative top-0 z-20 login-page h-[78%] lg:h-[70%] w-full flex items-start lg: pt-28 lg:text-lg">
 
-      {/* formik form cont where whe handle several aspects of the form like validation of the fields
-      initial values, y the onSubmit function */}
-      <Formik
-        initialValues={LOGIN_FORM_INITAL_VALUES}
-        validationSchema={LOGIN_SCHEMA}
-        onSubmit={async (values, {setSubmitting}) => {
-          setSubmitting(false)
-          const credentials = {username: "eland", password: "admin123"}
-          const res = await logUser(credentials)
-          dispatch(updateUser({
-            ...credentials,
-            ...res
-          }))
-          router.push(ROUTES.DASHBOARD)
-        }}
-      >
-        {({
-          isSubmitting,
-          setValues,
-          values
-        }) => (
-          /* form built in component of formik */
-          <Form
-            className="relative bg-white flex flex-col items-center justify-evenly text-thirdColor mx-auto py-4 px-8 min-h-[400px] lg:min-h-[450px] w-[85%] max-w-[350px] lg:max-w-[380px] shadow-2xl border border-secondaryBgColor shadow-shadowColor rounded-2xl"
-          >
-            {/* title of the form */}
-            <h2 className="mb-6 text-3xl text-thirdColor">Login</h2>
-
-            <div className="my-1 w-full">
-              {/* input built-in component of mui */}
-              <TextField
-                className="w-full"
-                name="email" type="email" label="email" variant="standard"
-                onChange={(e) => {
-                  const newValue = e.target.value;
-                  setValues({...values, email: newValue})
-                }}
-              />
-              {/* error message component of formik*/}
-              <ErrorMessage className="mt-1 text-warningColor" name="email" component="div" />
-            </div>
-
-            <div className="my-1 w-full">
-              <TextField
-                className="w-full"
-                id="password"
-                name="password" type="password" label="password" variant="standard"
-                onChange={(e) => {
-                  const newValue = e.target.value;
-                  setValues({...values, password: newValue})
-                }}
-                value={values.password}
-              />
-              <ErrorMessage className="mt-1 text-warningColor" name="password" component="div" />
-            </div>
-
-            {/* text with link that redirects to sign-up page */}
-            <div className="w-full justify-start pl-1 mt-4 mb-1">
-              <Link href={"/sign-up"}>
-                <p>
-                ¿No tienes una cuenta?
-                  <strong className=" text-secondaryBgColor underline"> Crear cuenta</strong>
-                </p>
-              </Link>
-            </div>
-
-            {/* submit button */}
-            <button
-              type="submit"
-              className="w-24 p-2 mt-2 bg-secondaryBgColor rounded-lg text-thirdColor font-bold text-lg
-              hover:bg-thirdColor hover:text-secondaryBgColor transition-all"
-              disabled={isSubmitting}
+        {/* formik form cont where whe handle several aspects of the form like validation of the fields
+        initial values, y the onSubmit function */}
+        <Formik
+          initialValues={LOGIN_FORM_INITAL_VALUES}
+          validationSchema={LOGIN_SCHEMA}
+          onSubmit={async (values, {setSubmitting}) => {
+            setSubmitting(false)
+            const credentials = {username: "eland", password: "admin123"}
+            const res = await logUser(credentials)
+            console.log({res})
+            dispatch(updateUser({
+              ...credentials,
+              ...res
+            }))
+            router.push(ROUTES.DASHBOARD)
+          }}
+        >
+          {({
+            isSubmitting,
+            setValues,
+            values
+          }) => (
+            /* form built in component of formik */
+            <Form
+              className="relative bg-white flex flex-col items-center justify-evenly text-thirdColor mx-auto py-4 px-8 min-h-[400px] lg:min-h-[450px] w-[85%] max-w-[350px] lg:max-w-[380px] shadow-2xl border border-secondaryBgColor shadow-shadowColor rounded-2xl"
             >
-              Log in
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+              {/* title of the form */}
+              <h2 className="mb-6 text-3xl text-thirdColor">Login</h2>
+
+              <div className="my-1 w-full">
+                {/* input built-in component of mui */}
+                <TextField
+                  className="w-full"
+                  name="email" type="email" label="email" variant="standard"
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setValues({...values, email: newValue})
+                  }}
+                />
+                {/* error message component of formik*/}
+                <ErrorMessage className="mt-1 text-warningColor" name="email" component="div" />
+              </div>
+
+              <div className="my-1 w-full">
+                <TextField
+                  className="w-full"
+                  id="password"
+                  name="password" type="password" label="password" variant="standard"
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setValues({...values, password: newValue})
+                  }}
+                  value={values.password}
+                />
+                <ErrorMessage className="mt-1 text-warningColor" name="password" component="div" />
+              </div>
+
+              {/* text with link that redirects to sign-up page */}
+              <div className="w-full justify-start pl-1 mt-4 mb-1">
+                <Link href={"/sign-up"}>
+                  <p>
+                  ¿No tienes una cuenta?
+                    <strong className=" text-secondaryBgColor underline"> Crear cuenta</strong>
+                  </p>
+                </Link>
+              </div>
+
+              {/* submit button */}
+              <button
+                type="submit"
+                className="w-24 p-2 mt-2 bg-secondaryBgColor rounded-lg text-thirdColor font-bold text-lg
+                hover:bg-thirdColor hover:text-secondaryBgColor transition-all"
+                disabled={isSubmitting}
+              >
+                Log in
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </>
   )
 }
 

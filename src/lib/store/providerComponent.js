@@ -9,8 +9,6 @@ const ReduxProvider = ({ children }) => {
 
   if(!storeRef) storeRef.current = store();
 
-  console.log("creating store", {store})
-
   return <Provider store={storeRef.current}>{children}</Provider>;
 };
 
