@@ -3,6 +3,8 @@
 import { Formik, ErrorMessage, Form } from "formik"
 import { SIGN_UP_FORM_INITIAL_VALUES } from "../../utils/constants";
 import { SIGN_UP_SCHEMA } from "@/utils/schemas";
+import { SIGN_UP_FORM_INITIAL_VALUES } from "../../utils/constants";
+import { SIGN_UP_SCHEMA } from "@/utils/schemas";
 import Link from "next/link"
 import TextField from '@mui/material/TextField';
 import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
@@ -11,7 +13,13 @@ import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar
 //make the log user function happen when sending valid credentials
 //update the local user.authenticated to true and user.role
 //then app should only allow user to stay on authenticated pages until user signs out. 
+//implement a way to store data locally, could be redux or something else, check possible libraries
+//make the log user function happen when sending valid credentials
+//update the local user.authenticated to true and user.role
+//then app should only allow user to stay on authenticated pages until user signs out. 
 function SignUp () {
+
+
 
 
   return (

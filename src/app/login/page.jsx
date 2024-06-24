@@ -3,6 +3,8 @@
 import { Formik, Form, ErrorMessage } from "formik"
 import { LOGIN_FORM_INITAL_VALUES, ROUTES } from "../../utils/constants";
 import { LOGIN_SCHEMA } from "@/utils/schemas";
+import { LOGIN_FORM_INITAL_VALUES, ROUTES } from "../../utils/constants";
+import { LOGIN_SCHEMA } from "@/utils/schemas";
 import Link from "next/link"
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +13,7 @@ import { authUser } from "@/services/userService";
 import { useRouter } from "next/navigation";
 import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
 
+//create a services function that contains all the fetching functions
 //create a services function that contains all the fetching functions
 //in this component we use a library for handling the form workflow, the library is formik
 
