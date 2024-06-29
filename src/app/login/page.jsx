@@ -11,9 +11,7 @@ import { authUser } from "@/services/userService";
 import { useRouter } from "next/navigation";
 import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
 
-//create a services function that contains all the fetching functions
-//create a services function that contains all the fetching functions
-//in this component we use a library for handling the form workflow, the library is formik
+//TODO:implement a toast for when the user did not auth correctly
 
 function Login () {
   const router = useRouter()
@@ -42,13 +40,15 @@ function Login () {
           validationSchema={LOGIN_SCHEMA}
           onSubmit={async (values, {setSubmitting}) => {
             setSubmitting(false)
-            const credentials = {username: "eland", password: "admin123"}
-            const res = await logUser(credentials)
-            console.log({res})
-            dispatch(updateUser({
-              ...credentials,
-              ...res
-            }))
+            const credentials = {username: values.email, password: values.password}
+            const data = await logUser(credentials)
+            const depuratedUserData = {
+              token: data.token,
+              role: data.userData.role,
+              ...data.userData.client
+            }
+            console.log({depuratedUserData})
+            dispatch(updateUser(depuratedUserData))
             router.push(ROUTES.DASHBOARD)
           }}
         >

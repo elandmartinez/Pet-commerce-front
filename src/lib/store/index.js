@@ -12,9 +12,10 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userSlice from "./slices/userSlice";
+import userSlice from './slices/userSlice';
+import productsSlice from "./slices/productsSlice.js"
 
-const rootReducer = combineReducers({user: userSlice})
+const rootReducer = combineReducers({user: userSlice, products: productsSlice})
 
 const persistConfig = {
   key: "pet-commerce",

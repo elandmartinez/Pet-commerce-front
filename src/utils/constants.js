@@ -8,6 +8,8 @@ export const LOGIN_FORM_INITAL_VALUES = {
 export const SIGN_UP_FORM_INITIAL_VALUES = {
   name: "",
   email: "",
+  phoneNumber: 0,
+  nationalCode: 0,
   password: "",
   repeat_password: ""
 }
@@ -29,6 +31,8 @@ export const ROUTES = {
 export const userSliceInitialValue = {
   username: "",
   password: "",
+  phoneNumber: "",
+  national: "",
   token: ""
 }
 
