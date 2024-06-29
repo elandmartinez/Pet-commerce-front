@@ -37,12 +37,12 @@ export default function Dashboard () {
   return (
     <>
       <AuthPageNavbar />
-      <main className="w-full h-full flex flex-col items-center px-10">
+      <main className="w-full h-full flex flex-col items-center px-10 pb-10">
         <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center" >
           <h1 className="text-[30px] mb-6" >What does your pet need today?</h1>
           <h2 className="text-[20px]" >We have for you...</h2>
         </div>
-        <div className={`${roboto.className} w-full h-full overflow-y-scroll grid-styles`}>
+        <div className={`${roboto.className} w-full grid-styles`}>
           {
             products
             ?
