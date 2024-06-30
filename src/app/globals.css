@@ -23,8 +23,6 @@
 }
 
 body {
-  /* background-image: url("../assets/14710.jpg");
-  background-size: contain; */
   background-color: var(--main-bg-color);
   color: var(--main-color);
   width: 100vw;
@@ -63,13 +61,21 @@ body::-webkit-scrollbar {
   transform-origin: bottom right;
 }
 
-.product-article {
+.product-article, .price-text, .add-product-icon{
   transition: all 200ms;
 }
 
 .product-article:hover {
   scale: 1.05;
   box-shadow: 0 2px 10px 1px var(--hover-color), 0 2px 3px 0px var(--hover-color);
+}
+
+.product-article:hover .price-text {
+  color: var(--secondary-bg-color)
+}
+
+.add-product-icon:active {
+  background-color: var(--secondary-bg-color);
 }
 
 .grid-styles {

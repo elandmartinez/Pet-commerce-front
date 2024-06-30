@@ -14,6 +14,14 @@ export const SIGN_UP_FORM_INITIAL_VALUES = {
   repeat_password: ""
 }
 
+export const PRODUCTS_CATEGORIES = {
+  FOOD: "Food",
+  HYGIENE: "Hygiene",
+  FURNITURE: "Furniture",
+  ACCESORIES: "Accesories",
+  OTHERS: "Others"
+}
+
 // url routes
 
 export const ROUTES = {
