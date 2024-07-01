@@ -34,6 +34,10 @@ export const ROUTES = {
   PRODUCT: "/product"
 }
 
+export const PRODUCT_AMOUNT_CHANGE_ACTIONS = {
+  ADD: "ADD",
+  REMOVE: "REMOVE"
+}
 
 //store related constants
 

@@ -5,7 +5,7 @@
 
 /* css variables, usable on any class of the traditional css of this project */
 :root {
-  --main-bg-color: #f8f8f8;
+  --main-bg-color: #e4ebed;
   --white: #ffffff;
   --secondary-bg-color: #0ee4ce;
   --main-color: #1d2224;
@@ -59,6 +59,10 @@ body::-webkit-scrollbar {
 .category-link__cont:hover .category-link::after {
   width: 100%;
   transform-origin: bottom right;
+}
+
+.clickable {
+  transition: all 200ms;
 }
 
 .product-article, .price-text, .add-product-icon{
