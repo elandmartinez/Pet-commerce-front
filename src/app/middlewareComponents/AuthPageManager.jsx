@@ -4,7 +4,7 @@ import { persistor } from "@/lib/store"
 import { PersistGate } from "redux-persist/integration/react"
 import { AUTH_REQUIRED_PAGES, NO_AUTH_REQUIRED_PAGES, ROUTES } from "@/utils/constants";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function AuthPageManager ({children}) {
   const user = useSelector(state => state.user)
@@ -19,12 +19,12 @@ export default function AuthPageManager ({children}) {
 
   //here we redirect to login if user is trying to access a page that requires to be logged and user is not logged
   if(isLoadingOnAuthRequiredPage && (user?.token === "")) {
-    router.push(ROUTES.LOGIN)
+    redirect(ROUTES.LOGIN)
   }
 
   //here we redirect to dashboard if user is trying to access a page that requires to not be logged and user is logged
   if(isLoadingOnNoAuthRequiredPage && user?.token) {
-    router.push(ROUTES.DASHBOARD)
+    redirect(ROUTES.DASHBOARD)
   }
 
   return (

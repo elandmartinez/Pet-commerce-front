@@ -6,7 +6,7 @@ import AuthPageManager from "./middlewareComponents/AuthPageManager";
 //here we obtain the roboto font and specify the weight, styles,
 //and subsets that we want to get it with
 const roboto = Roboto({
-  weight: ["100", "300", "500"],
+  weight: ["100", "300", "500", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"]
 })

@@ -18,6 +18,7 @@ export default function Dashboard () {
   const dispatch = useDispatch()
   const products = useSelector(state => state.products)
   const user = useSelector((state) => state.user)
+  const cartProducts = useSelector(state => state.cartProducts)
 
   useEffect(() => {
     async function getProductsData (token) {

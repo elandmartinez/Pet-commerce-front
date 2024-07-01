@@ -30,7 +30,8 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   PROFILE: "/profile",
   SHOPPING_CART: "/shopping-cart",
-  MY_SHOPPINGS: "/my-shoppings"
+  MY_SHOPPINGS: "/my-shoppings",
+  PRODUCT: "/product"
 }
 
 
