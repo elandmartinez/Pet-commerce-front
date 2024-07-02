@@ -45,7 +45,6 @@ function SignUp () {
             const userToken = await authUser(userCredential)
 
             dispatch(updateUser({...values, ...userToken}))
-            console.log({userToken})
 
             router.push(ROUTES.DASHBOARD)
 
@@ -102,7 +101,6 @@ function SignUp () {
                   <TextField className="w-full" name="nationalCode" type="number" label="code" variant="standard" inputProps={{type: "number"}}
                     onChange={(e) => {
                       const newValue = parseInt(e.target.value);
-                      console.log({e})
                       setValues({...values, nationalCode: newValue})
                     }}
                   />

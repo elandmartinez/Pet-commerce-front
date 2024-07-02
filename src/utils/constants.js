@@ -22,6 +22,8 @@ export const PRODUCTS_CATEGORIES = {
   OTHERS: "Others"
 }
 
+export const PRODUCTS_CATEGORIES_ARRAY = ["Food", "Hygiene", "Furniture", "Accesories", "Others"]
+
 // url routes
 
 export const ROUTES = {
@@ -31,7 +33,8 @@ export const ROUTES = {
   PROFILE: "/profile",
   SHOPPING_CART: "/shopping-cart",
   MY_SHOPPINGS: "/my-shoppings",
-  PRODUCT: "/product"
+  PRODUCT: "/product",
+  PRODUCTS_CATEGORY: "/products/category"
 }
 
 export const PRODUCT_AMOUNT_CHANGE_ACTIONS = {

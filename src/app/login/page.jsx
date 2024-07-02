@@ -47,7 +47,6 @@ function Login () {
               role: data.userData.role,
               ...data.userData.client
             }
-            console.log({depuratedUserData})
             dispatch(updateUser(depuratedUserData))
             router.push(ROUTES.DASHBOARD)
           }}
