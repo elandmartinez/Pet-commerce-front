@@ -7,9 +7,9 @@ import Link from "next/link"
 import TextField from '@mui/material/TextField';
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../lib/store/slices/userSlice";
-import { authUser } from "@/services/userService";
 import { useRouter } from "next/navigation";
 import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
+import { authUser } from "@/lib/services";
 
 //TODO:implement a toast for when the user did not auth correctly
 

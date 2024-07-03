@@ -1,12 +1,12 @@
 "use client"
 
-import { Pacifico, Roboto } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { useDispatch, useSelector } from "react-redux";
 import AuthPageNavbar from "../components/AuthPageNavbar/AuthPageNavbar";
 import ArticleCard from "../components/articleCard/ArticleCard";
-import { getProducts } from "@/services/productService";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { updateProducts } from "@/lib/store/slices/productsSlice";
+import { fetchProducts } from "@/lib/services";
 
 const roboto = Roboto({
   weight: ["100", "300", "500"],
@@ -23,7 +23,7 @@ export default function Dashboard () {
   useEffect(() => {
     async function getProductsData (token) {
       try {
-        const products = await getProducts(token);
+        const products = await fetchProducts(token);
         
         dispatch(updateProducts(products))
         return 
