@@ -25,7 +25,8 @@ module.exports = {
       backgroundTransparentGray: "var(--background-transparent-gray)",
       warningColor: "var(--warning-color)",
       warningHoverColor: "var(--warning-hover-color)",
-      white: 'var(--white)'
+      white: 'var(--white)',
+      ocre: 'var(--ocre)',
     }
   },
   plugins: [],

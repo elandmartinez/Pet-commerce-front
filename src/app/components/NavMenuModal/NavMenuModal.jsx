@@ -76,7 +76,7 @@ export default function NavMenuModal() {
             </li>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={"/shopping-cart"} className='flex w-full h-full p-4 pl-2'>
+                <Link href={"/my-shoppings"} className='flex w-full h-full p-4 pl-2'>
                   <ShoppingBagIcon className='ml-1 mr-2' />
                   <p>My shoppings</p>
                 </Link>
