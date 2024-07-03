@@ -15,11 +15,17 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userSlice from './slices/userSlice';
 import productsSlice from "./slices/productsSlice.js"
 import cartProductsSlice from "./slices/cartProductsSlice.js"
+import ordersSlice from './slices/ordersSlice';
+import reviewsSlice from './slices/reviewsSlice';
+import addressesSlice from './slices/addressesSlice';
 
 const rootReducer = combineReducers({
   user: userSlice,
   products: productsSlice,
-  cartProducts: cartProductsSlice
+  cartProducts: cartProductsSlice,
+  orders: ordersSlice,
+  reviews: reviewsSlice,
+  addresses: addressesSlice
 })
 
 const persistConfig = {
