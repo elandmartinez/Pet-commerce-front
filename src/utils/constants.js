@@ -32,7 +32,7 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   PROFILE: "/profile",
   SHOPPING_CART: "/shopping-cart",
-  MY_SHOPPINGS: "/my-shoppings",
+  MY_ORDERS: "/my-orders",
   PRODUCT: "/product",
   PRODUCTS_CATEGORY: "/products/category"
 }
@@ -69,5 +69,5 @@ export const FETCH_METHODS = {
 
 export const BASE_ENDPOINT = "http://localhost:8080/api"
 
-export const AUTH_REQUIRED_PAGES = ["/dashboard", "/profile", "/my-shoppings", "/shopping-cart"]
+export const AUTH_REQUIRED_PAGES = ["/dashboard", "/profile", "/my-orders", "/shopping-cart", "/product"]
 export const NO_AUTH_REQUIRED_PAGES = ["/login", "sign-up"]

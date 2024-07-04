@@ -7,6 +7,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Link from "next/link";
 import { Button } from '@mui/material';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import { ROUTES } from '@/utils/constants';
 
 export default function NavMenuModal() {
   const [showSideBar, setShowSideBar] = React.useState(false);
@@ -60,7 +61,7 @@ export default function NavMenuModal() {
           <ul className='w-full'>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={"/profile"} className='flex w-full h-full p-4 pl-2'>
+                <Link href={ROUTES.PROFILE} className='flex w-full h-full p-4 pl-2'>
                   <PersonIcon className='ml-1 mr-2' />
                   <p>My profile</p>
                 </Link>
@@ -68,7 +69,7 @@ export default function NavMenuModal() {
             </li>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={"/shopping-cart"} className='flex w-full h-full p-4 pl-2'>
+                <Link href={ROUTES.SHOPPING_CART} className='flex w-full h-full p-4 pl-2'>
                   <ShoppingCartIcon className='ml-1 mr-2' />
                   <p>Shopping cart</p>
                 </Link>
@@ -76,15 +77,15 @@ export default function NavMenuModal() {
             </li>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={"/my-shoppings"} className='flex w-full h-full p-4 pl-2'>
+                <Link href={ROUTES.MY_ORDERS} className='flex w-full h-full p-4 pl-2'>
                   <ShoppingBagIcon className='ml-1 mr-2' />
-                  <p>My shoppings</p>
+                  <p>My Orders</p>
                 </Link>
               </div>
             </li>
             <li className='w-full text-warningColor' >
               <div className='w-full hover:bg-warningHoverColor transition-all'>
-                <Link href={"/"} className='flex w-full h-full p-4 pl-2'>
+                <Link href={ROUTES.LOGIN} className='flex w-full h-full p-4 pl-2'>
                   <ExitToAppIcon className='ml-1 mr-2' sx={{fill: "#fa5c8e"}} />
                   <p>Log out</p>
                 </Link>
