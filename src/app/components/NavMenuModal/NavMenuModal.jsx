@@ -5,8 +5,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Link from "next/link";
-import { Button } from '@mui/material';
-import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import { Button, ClickAwayListener } from '@mui/material';
 import { ROUTES } from '@/utils/constants';
 
 export default function NavMenuModal() {

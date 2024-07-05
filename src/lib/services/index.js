@@ -128,7 +128,7 @@ export async function fetchOrdersByClientId (clientId, token) {
 
 export async function postOrder(orderData, token) {
   try {
-    const res = fetch(`${BASE_ENDPOINT}/orders/post-order`, {
+    const res = await fetch(`${BASE_ENDPOINT}/orders/post-order`, {
       method: FETCH_METHODS.POST,
       headers: {
         ...FETCH_HEADERS,
@@ -137,7 +137,7 @@ export async function postOrder(orderData, token) {
       body: JSON.stringify(orderData)
     })
 
-    return res.json()
+    return res
 
   } catch (error) {
    throw new Error("Post order failed in frontend request function") 
@@ -148,7 +148,7 @@ export async function postOrder(orderData, token) {
 
 export async function fetchAddressesByClientId (clientId, token) {
   try {
-    const res = fetch(`${BASE_ENDPOINT}/addresses/get-by-product-id/${clientId}`, {
+    const res = await fetch(`${BASE_ENDPOINT}/addresses/get-by-product-id/${clientId}`, {
       method: FETCH_METHODS.GET,
       headers: {
         ...FETCH_HEADERS,
@@ -165,7 +165,7 @@ export async function fetchAddressesByClientId (clientId, token) {
 
 export async function postAddress (addressData, token) {
   try {
-    const res = fetch(`${BASE_ENDPOINT}/addresses/post-address`, {
+    const res = await fetch(`${BASE_ENDPOINT}/addresses/post-address`, {
       method: FETCH_METHODS.POST,
       headers: {
         ...FETCH_HEADERS,

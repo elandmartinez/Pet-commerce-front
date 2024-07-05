@@ -17,7 +17,7 @@ export const cartProductsSlice = createSlice({
       })
       
       if(!productAlreadyAdded) {
-        cartProducts.push({...action.payload.productData, amountInTheCart: 1})
+        cartProducts.push({...action.payload.productData, amountInTheCart: action.payload.amountToAdd})
       } else {
         productAlreadyAdded.amountInTheCart += action.payload.amountToAdd
         cartProducts[addedProductIndex] = {...productAlreadyAdded};
@@ -25,10 +25,13 @@ export const cartProductsSlice = createSlice({
     },
     updateCartProducts: (cartProducts, actions) => {
       return [...actions.payload]
+    },
+    cleanCartProducts: () => {
+      return []
     }
   }
 })
 
-export const {addProductToCart, updateCartProducts} = cartProductsSlice.actions
+export const {addProductToCart, updateCartProducts, cleanCartProducts} = cartProductsSlice.actions
 
 export default cartProductsSlice.reducer

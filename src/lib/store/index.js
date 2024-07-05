@@ -15,7 +15,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userSlice from './slices/userSlice';
 import productsSlice from "./slices/productsSlice.js"
 import cartProductsSlice from "./slices/cartProductsSlice.js"
-import ordersSlice from './slices/ordersSlice';
+import orderProductsIdsSlice from './slices/orderProductsIdsSlice';
 import productReviewsSlice from './slices/productReviewsSlice';
 import addressesSlice from './slices/addressesSlice';
 
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   user: userSlice,
   products: productsSlice,
   cartProducts: cartProductsSlice,
-  orders: ordersSlice,
+  orderProductsIds: orderProductsIdsSlice,
   reviews: productReviewsSlice,
   addresses: addressesSlice
 })

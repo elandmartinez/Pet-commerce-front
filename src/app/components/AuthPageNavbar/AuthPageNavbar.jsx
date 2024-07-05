@@ -20,7 +20,7 @@ function AuthPageNavbar (){
     <div className="relative p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor w-full">
       <div className={` bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>
         {/* logo container, it has the logo and the title of it */}
-        <div className="relative top-[2px] flex flex-col items-center text-[12px]">  
+        <div onClick={() => {router.push(ROUTES.DASHBOARD)}} className="relative top-[2px] flex flex-col items-center text-[12px]">  
           <img
             src={pawLogo.src}
             className="w-8 h-8 fill-thirdColor sm:w-12 sm:h-12 lg:w-14 lg:h-14"

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import AuthPageNavbar from "../components/AuthPageNavbar/AuthPageNavbar"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchOrdersByClientId } from "@/lib/services"
-import { udpdateOrders } from "@/lib/store/slices/ordersSlice"
+import { udpdateOrders } from "@/lib/store/slices/orderProductsIIdsSlice"
 import { ROUTES } from "@/utils/constants"
 import { useRouter } from "next/navigation"
 const NoOrdersFoundComponent = function () {

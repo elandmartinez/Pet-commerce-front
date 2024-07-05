@@ -2,6 +2,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/lib/provider/index";
 import AuthPageManager from "./middlewareComponents/AuthPageManager";
+import 'react-toastify/dist/ReactToastify.css';
 
 //here we obtain the roboto font and specify the weight, styles,
 //and subsets that we want to get it with

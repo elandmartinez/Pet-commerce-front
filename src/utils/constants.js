@@ -1,5 +1,7 @@
 "use client"
 
+export const DEFAULT_ORDER_STATUS = "Delivered"
+
 export const LOGIN_FORM_INITAL_VALUES = {
   email: "",
   password: ""
@@ -12,6 +14,17 @@ export const SIGN_UP_FORM_INITIAL_VALUES = {
   nationalCode: 0,
   password: "",
   repeat_password: ""
+}
+
+export const PAYMENT_FORM_INITIAL_VALUES = {
+  addressStreet: "",
+  addressCity: "",
+  addressRegion: "",
+  addressCountry: "",
+  paymentCardNumber: "",
+  paymentCardOwnerName: "",
+  paymentCardCVV: "",
+  paymentCardExpirationDate: ""
 }
 
 export const PRODUCTS_CATEGORIES = {
@@ -34,7 +47,8 @@ export const ROUTES = {
   SHOPPING_CART: "/shopping-cart",
   MY_ORDERS: "/my-orders",
   PRODUCT: "/product",
-  PRODUCTS_CATEGORY: "/products/category"
+  PRODUCTS_CATEGORY: "/products/category",
+  PAYMENTS: "/payment"
 }
 
 export const PRODUCT_AMOUNT_CHANGE_ACTIONS = {

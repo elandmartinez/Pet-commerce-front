@@ -2,8 +2,11 @@
 import PersonIcon from '@mui/icons-material/Person';
 import ModeIcon from '@mui/icons-material/Mode';
 import AuthPageNavbar from '../components/AuthPageNavbar/AuthPageNavbar';
+import { useSelector } from 'react-redux';
 
 export default function Profile () {
+  const user = useSelector(state => state.user)
+
   return (
     <>
       <AuthPageNavbar />  
@@ -22,13 +25,11 @@ export default function Profile () {
             </PersonIcon>
           </div>
           <h1 className='w-full text-center pb-2 border-b-2 border-secondaryColor'>Profile</h1>
-          <div classname="flex flex-col justify-center items-center">
-              <div>
-                <h3></h3>
-                <div>
-                  {/* <input type={} /> */}
-                </div>
-              </div>
+          <div classname="w-full flex flex-col justify-center items-center">
+            <div className='w-full mt-8 text-start'>
+              <h3 className='text-[20px] text-mainColor mb-1'>Email</h3>
+              <p>{user.email}</p>     
+            </div>
           </div>
         </div>
       </main>

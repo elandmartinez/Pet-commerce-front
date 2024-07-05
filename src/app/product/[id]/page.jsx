@@ -10,10 +10,13 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import PersonIcon from '@mui/icons-material/Person';
-import { PRODUCT_AMOUNT_CHANGE_ACTIONS } from "@/utils/constants";
+import { PRODUCT_AMOUNT_CHANGE_ACTIONS, ROUTES } from "@/utils/constants";
 import ArticleCard from "@/app/components/articleCard/ArticleCard";
 import { fetchReviewsByProductId } from "@/lib/services";
 import { updateProductReviews } from "@/lib/store/slices/productReviewsSlice";
+import { addProductToCart } from "@/lib/store/slices/cartProductsSlice";
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
 
 //TODO::implement logic where a comment box is displayed if the user has already bought that product, in other words, if the clien has any order with the product in it
 
@@ -26,6 +29,8 @@ const NoReviewsFoundComponent = function () {
 }
 
 const ReviewsComponent = function ({ reviews }) {
+
+
   return (
     <>
       {reviews.map((reviewData, index) => {
@@ -51,12 +56,15 @@ const ReviewsComponent = function ({ reviews }) {
 export default function Page ({params}) {
   const [productReviews, setRpoductReviews] = useState([]);
   const [productAmountToBuy, setProductAmountToBuy] = useState(0)
+  const router = useRouter();
   const { token: userToken } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const products = useSelector(state => state.products)
   const localProductData = products.find(product => product.productId === parseInt(params.id))
 
   if(!localProductData) return (<LoadingProduct />)
+
+  console.log({localProductData})
 
   //fucntion that handles the set of the state productAmountToBuy, it makes sure that the amount is not higher that the current stock, and not lower than 0
   function handleProductAmountToBuyChange (action) {
@@ -71,6 +79,27 @@ export default function Page ({params}) {
         break;
     }
   }
+
+  function handleBuyProductsButton () {
+    if(productAmountToBuy === 0) {
+      toast.error("Amount selected for product is 0, please set at least 1")
+      return
+    }
+    dispatch(addProductToCart({productData: localProductData, productAmountToBuy}))
+    router.push(`${ROUTES.SHOPPING_CART}`)
+
+  }
+
+
+  function handleAddToCartButton () {
+    if(productAmountToBuy === 0) {
+      toast.error("Amount selected for product is 0, please set at least 1")
+      return
+    }
+    dispatch(addProductToCart({productData: localProductData, amountToAdd: productAmountToBuy}))
+    toast.success("The product was added to the cart")
+  }
+
 
   //here i get the products with the same category to display them on the "related products" section below
   const relatedProducts = products.filter(product => {
@@ -101,6 +130,7 @@ export default function Page ({params}) {
 
   return (
     <>
+    <ToastContainer />
       <AuthPageNavbar />
       <main className="w-full">
         {/* product card container */}
@@ -128,7 +158,7 @@ export default function Page ({params}) {
 
             {/* buy button and addToCart button */}
             <div className="w-full my-4 flex flex-col items-center font-normal">
-              <div className="mb-2 w-[95%]">
+              <div className="mb-2 w-[95%]" onClick={() => {handleBuyProductsButton()}}>
                 <Button
                   sx={{
                     backgroundColor: "var(--third-color)",
@@ -148,7 +178,7 @@ export default function Page ({params}) {
                   <ShoppingCartCheckoutIcon sx={{marginLeft: "10"}}/>
                 </Button>
               </div>
-              <div className="w-[95%]">
+              <div className="w-[95%]" onClick={() => {handleAddToCartButton()}}>
                 <Button
                   sx={{
                     backgroundColor: "var(--secondary-color)",

@@ -36,5 +36,16 @@ export const SIGN_UP_SCHEMA = yup.object().shape({
     .string()
     .min(7, "password must have at least 7 characters")
     .required("this field is required")
+})
 
-});
+export const paymentFormSchema = yup.object().shape({
+  addressStreet: yup.string().min(6, "minimum 6 characters at least").max(50, "can't have more than 50 characters").required(),
+  addressCity: yup.string().min(4, "minimum 4 characters at least").max(50, "can't have more than 50 characters").required(),
+  addressRegion: yup.string().min(6, "minimum 6 characters at least").max(50, "can't have more than 50 characters").required(),
+  addressCountry: yup.string().max(50, "can't have more than 50 characters").required(),
+
+  paymentCardNumber: yup.string().min(19, "can't have less than 16 numbers").max(19, "can't have more than 16 numbers").required(),
+  paymentCardOwnerName: yup.string().max(50, "can't have more than 50 characters").required(),
+  paymentCardCVV: yup.number().min(1).max(999).required(),
+  paymentCardExpirationDate: yup.string().max(5, "can't have more than 5 characters").required(),
+})
