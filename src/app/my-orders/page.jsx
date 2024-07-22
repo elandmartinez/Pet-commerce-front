@@ -4,9 +4,11 @@ import { useEffect, useState } from "react"
 import AuthPageNavbar from "../components/AuthPageNavbar/AuthPageNavbar"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchOrdersByClientId } from "@/lib/services"
-import { udpdateOrders } from "@/lib/store/slices/orderProductsIIdsSlice"
+import { udpdateOrders } from "@/lib/store/slices/orderProductsIdsSlice"
 import { ROUTES } from "@/utils/constants"
 import { useRouter } from "next/navigation"
+import { updateOrders } from "@/lib/store/slices/ordersSlice"
+
 const NoOrdersFoundComponent = function () {
   return (
     <>
@@ -16,6 +18,7 @@ const NoOrdersFoundComponent = function () {
 }
 
 const OrdersComponent = function ({ orders, router }) {
+  console.log({orders})
   return (
     <>
       {orders.map((order, index) => (
@@ -39,19 +42,21 @@ const OrdersComponent = function ({ orders, router }) {
   )
 }
 
-export default function MyShoppings () {
+export default function MyOrders () {
   const [orderData, setOrderData] = useState([])
   const dispatch = useDispatch()
   const router = useRouter()
   const orders = useSelector(state => state.orders)
   const userData = useSelector(state => state.user)
-
   useEffect(() => {
     const userId = userData.email;
     async function getOrdersByClientId(clientId, token) {
       const newOrders = await fetchOrdersByClientId(clientId, token)
+      console.log({newOrders})
+
+      dispatch(updateOrders(newOrders))
       setOrderData(newOrders)
-      
+
       if(newOrders !== orders) dispatch(udpdateOrders(newOrders))
     }
 

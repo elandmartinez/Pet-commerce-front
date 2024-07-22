@@ -6,11 +6,11 @@ import { SIGN_UP_SCHEMA } from "@/utils/schemas";
 import Link from "next/link"
 import TextField from '@mui/material/TextField';
 import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
-import { postClient } from "@/services/clientService";
-import { authUser } from "@/services/userService";
+import { authUser } from "@/lib/services";
 import { useDispatch } from "react-redux";
 import { updateUser } from "@/lib/store/slices/userSlice";
 import { useRouter } from "next/navigation";
+import { postClient } from "@/lib/services";
 
 
 function SignUp () {
@@ -29,15 +29,13 @@ function SignUp () {
   }
 
   return (
-    <>
+    <div className="w-full pb-10">
       <NonAuthPageNavbar />
-      <div className="relative top-0 z-20 login-page w-full h-[78%] lg:h-[70%] flex items-center lg:text-lg">
+      <div className="relative z-20 mt-10 lg:mt-20 h-full w-full flex items-center lg:text-lg">
         <Formik
           initialValues={SIGN_UP_FORM_INITIAL_VALUES}
           validationSchema={SIGN_UP_SCHEMA}
           onSubmit={async (values, {setSubmitting}) => {
-            console.log({values})
-            debugger
             delete values.repeat_password
             await createClient(values)
 
@@ -91,7 +89,6 @@ function SignUp () {
                   <TextField className="w-full" name="phoneNumber" type="number" label="Phone number" variant="standard" inputProps={{type: "number"}}
                     onChange={(e) => {
                       const newValue = parseInt(e.target.value);
-                      console.log(newValue)
                       setValues({...values, phoneNumber: newValue})
                     }}
                   />
@@ -134,7 +131,7 @@ function SignUp () {
 
               {/* LOGIN LINK */}
               <div className="w-full justify-start pl-1 mt-4 mb-1">
-                <Link href={"/login"}>
+                <Link href={"/login"} className="link">
                   <p className="">
                   ¿Ya tienes una cuenta?
                     <strong className=" text-secondaryBgColor underline"> Ingresar con mi cuenta</strong>
@@ -156,7 +153,7 @@ function SignUp () {
           )}
         </Formik>
       </div>
-    </>
+    </ div>
   )
 }
 

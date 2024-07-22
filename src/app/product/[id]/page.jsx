@@ -64,8 +64,6 @@ export default function Page ({params}) {
 
   if(!localProductData) return (<LoadingProduct />)
 
-  console.log({localProductData})
-
   //fucntion that handles the set of the state productAmountToBuy, it makes sure that the amount is not higher that the current stock, and not lower than 0
   function handleProductAmountToBuyChange (action) {
     switch(action) {
@@ -85,7 +83,7 @@ export default function Page ({params}) {
       toast.error("Amount selected for product is 0, please set at least 1")
       return
     }
-    dispatch(addProductToCart({productData: localProductData, productAmountToBuy}))
+    dispatch(addProductToCart({productData: localProductData, amountToAdd: productAmountToBuy}))
     router.push(`${ROUTES.SHOPPING_CART}`)
 
   }
@@ -115,7 +113,6 @@ export default function Page ({params}) {
       try {
         const reviews = await fetchReviewsByProductId(productId, token)
         const productReviews = reviews.filter(review => review.productId === productId)
-        console.log({productReviews, reviews})
 
         dispatch(updateProductReviews(productReviews))
         setRpoductReviews(productReviews)

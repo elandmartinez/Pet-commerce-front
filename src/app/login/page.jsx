@@ -29,9 +29,9 @@ function Login () {
   }
 
   return (
-    <>
+    <div className="w-full pb-10">
       <NonAuthPageNavbar /> 
-      <div className="relative top-0 z-20 login-page h-[78%] lg:h-[70%] w-full flex items-start lg: pt-28 lg:text-lg">
+      <div className="relative z-20 mt-10 lg:mt-20 login-page w-full flex items-start lg:text-lg">
 
         {/* formik form cont where whe handle several aspects of the form like validation of the fields
         initial values, y the onSubmit function */}
@@ -93,7 +93,7 @@ function Login () {
 
               {/* text with link that redirects to sign-up page */}
               <div className="w-full justify-start pl-1 mt-4 mb-1">
-                <Link href={"/sign-up"}>
+                <Link href={"/sign-up"} className="link">
                   <p>
                   ¿No tienes una cuenta?
                     <strong className=" text-secondaryBgColor underline"> Crear cuenta</strong>
@@ -114,7 +114,7 @@ function Login () {
           )}
         </Formik>
       </div>
-    </>
+    </div>
   )
 }
 

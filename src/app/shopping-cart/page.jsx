@@ -11,6 +11,7 @@ import { updateCartProducts } from "@/lib/store/slices/cartProductsSlice";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/utils/constants";
 import { udpdateOrderProductIds } from "@/lib/store/slices/orderProductsIdsSlice";
+import { updateOrders } from "@/lib/store/slices/ordersSlice";
 
 function CartProducts ({cartProducts, handleDeleteProduct, totalProductsPrice}) {
   const dispatch = useDispatch()
@@ -73,11 +74,10 @@ export default function ShoppingCart () {
   const dispatch = useDispatch()
   const [cartProductsState, setCartProductsState] = useState(cartProducts)
   const totalProductsPrice = cartProducts.reduce((acc, curr) => {
-    return acc += curr.price
+    return acc += (curr.price * curr.amountInTheCart)
   }, 0).toFixed(2)
 
   function handleDeleteProduct (productId) {
-    console.log(cartProductsState)
     const updatedCartProducts = [] 
     cartProductsState.forEach(product => {
       const newProduct = {...product} 
@@ -85,7 +85,6 @@ export default function ShoppingCart () {
         if(newProduct.amountInTheCart === 1) return
         newProduct.amountInTheCart = product.amountInTheCart - 1
       } 
-      console.log({newProduct})
       updatedCartProducts.push(newProduct)
     });
     setCartProductsState(updatedCartProducts)

@@ -7,8 +7,14 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Link from "next/link";
 import { Button, ClickAwayListener } from '@mui/material';
 import { ROUTES } from '@/utils/constants';
+import { useDispatch } from 'react-redux';
+import { cleanCartProducts } from '@/lib/store/slices/cartProductsSlice';
+import { cleanOrderProductsIds } from '@/lib/store/slices/orderProductsIdsSlice';
+import { cleanUser } from '@/lib/store/slices/userSlice';
+import { cleanOrders } from '@/lib/store/slices/ordersSlice';
 
 export default function NavMenuModal() {
+  const dispatch = useDispatch()
   const [showSideBar, setShowSideBar] = React.useState(false);
 
   const handleClick = () => {
@@ -18,6 +24,13 @@ export default function NavMenuModal() {
   const handleClickAway = () => {
     setShowSideBar(false);
   };
+
+  function handleLogOut () {
+    dispatch(cleanCartProducts())
+    dispatch(cleanOrderProductsIds())
+    dispatch(cleanUser())
+    dispatch(cleanOrders())
+  }
 
   return (
     //clickaway listener component used from mui
@@ -60,7 +73,7 @@ export default function NavMenuModal() {
           <ul className='w-full'>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={ROUTES.PROFILE} className='flex w-full h-full p-4 pl-2'>
+                <Link href={ROUTES.PROFILE} className='flex w-full h-full p-4 pl-2 link'>
                   <PersonIcon className='ml-1 mr-2' />
                   <p>My profile</p>
                 </Link>
@@ -68,7 +81,7 @@ export default function NavMenuModal() {
             </li>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={ROUTES.SHOPPING_CART} className='flex w-full h-full p-4 pl-2'>
+                <Link href={ROUTES.SHOPPING_CART} className='flex w-full h-full p-4 pl-2 link'>
                   <ShoppingCartIcon className='ml-1 mr-2' />
                   <p>Shopping cart</p>
                 </Link>
@@ -76,7 +89,7 @@ export default function NavMenuModal() {
             </li>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={ROUTES.MY_ORDERS} className='flex w-full h-full p-4 pl-2'>
+                <Link href={ROUTES.MY_ORDERS} className='flex w-full h-full p-4 pl-2 link'>
                   <ShoppingBagIcon className='ml-1 mr-2' />
                   <p>My Orders</p>
                 </Link>
@@ -84,7 +97,7 @@ export default function NavMenuModal() {
             </li>
             <li className='w-full text-warningColor' >
               <div className='w-full hover:bg-warningHoverColor transition-all'>
-                <Link href={ROUTES.LOGIN} className='flex w-full h-full p-4 pl-2'>
+                <Link href={ROUTES.LOGIN} onClick={handleLogOut}className='flex w-full h-full p-4 pl-2 link'>
                   <ExitToAppIcon className='ml-1 mr-2' sx={{fill: "#fa5c8e"}} />
                   <p>Log out</p>
                 </Link>

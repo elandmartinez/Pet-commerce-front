@@ -20,15 +20,14 @@ function AuthPageNavbar (){
     <div className="relative p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor w-full">
       <div className={` bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>
         {/* logo container, it has the logo and the title of it */}
-        <div onClick={() => {router.push(ROUTES.DASHBOARD)}} className="relative top-[2px] flex flex-col items-center text-[12px]">  
+        <Link href={ROUTES.DASHBOARD} className="link relative top-[2px] flex flex-col items-center text-[12px]">
           <img
             src={pawLogo.src}
             className="w-8 h-8 fill-thirdColor sm:w-12 sm:h-12 lg:w-14 lg:h-14"
             alt={"Pet-commerce logo"}
           />
           <h2 className={`${pacifico.className} relative bottom-[5px] text-[10px] sm:text-4 lg:text-6`}>Pet-commerce</h2>
-        </div>
-
+        </Link>
         {/* search bar container and also container of nav links that are shown when displays goes over
         640px*/}
         <div className="relative w-[60%] max-w-[400px] sm:flex sm:flex-col sm:items-center sm:w-[70%]">
@@ -52,7 +51,7 @@ function AuthPageNavbar (){
               {PRODUCTS_CATEGORIES_ARRAY.map((productCategory, index) => {
                 return (
                   <li key={index}>
-                    <Link href={`${ROUTES.PRODUCTS_CATEGORY}/${productCategory}`} className='w-full h-full flex justify-center items-center'>
+                    <Link href={`${ROUTES.PRODUCTS_CATEGORY}/${productCategory}`} className='link w-full h-full flex justify-center items-center'>
                       <div className="category-link__cont px-4 py-2 rounded-xl hover:bg-mainBgColor transition-all">
                         <p
                           className="category-link inline-block relative rounded-xl transition-all"

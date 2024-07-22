@@ -12,9 +12,12 @@ export const userSlice = createSlice({
         ...action.payload
       }
     },
+    cleanUser: () => {
+      return {}
+    }
   }
 });
 
-export const { updateUser } = userSlice.actions
+export const { updateUser, cleanUser } = userSlice.actions
 
 export default userSlice.reducer

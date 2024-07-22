@@ -38,6 +38,10 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.link:hover {
+  cursor: pointer;
+}
+
 .search-input:focus .search-icon {
   fill: var(--white);
 }
