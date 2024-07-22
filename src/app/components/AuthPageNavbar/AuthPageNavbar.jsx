@@ -52,9 +52,9 @@ function AuthPageNavbar (){
                 return (
                   <li key={index}>
                     <Link href={`${ROUTES.PRODUCTS_CATEGORY}/${productCategory}`} className='link w-full h-full flex justify-center items-center'>
-                      <div className="category-link__cont px-4 py-2 rounded-xl hover:bg-mainBgColor transition-all">
+                      <div className="category-link__cont">
                         <p
-                          className="category-link inline-block relative rounded-xl transition-all"
+                          className="category-link inline-block underline underline-offset-4 decoration-2 relative rounded-xl transition-all duration-300"
                         >
                           {productCategory}
                         </p>
