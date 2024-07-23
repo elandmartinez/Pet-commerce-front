@@ -7,6 +7,7 @@ import ArticleCard from "../components/articleCard/ArticleCard";
 import { useEffect } from "react";
 import { updateProducts } from "@/lib/store/slices/productsSlice";
 import { fetchProducts } from "@/lib/services";
+import Footer from "../components/Footer/Footer";
 
 const roboto = Roboto({
   weight: ["100", "300", "500"],
@@ -38,7 +39,7 @@ export default function Dashboard () {
   return (
     <>
       <AuthPageNavbar />
-      <main className="w-full h-full flex flex-col items-center px-2 pb-10">
+      <main className="w-full flex flex-col items-center px-2 pb-10">
         <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center" >
           <h1 className="text-[30px] mb-6" >What does your pet need today?</h1>
           <h2 className="text-[20px]" >We have for you...</h2>
@@ -59,6 +60,7 @@ export default function Dashboard () {
           }
         </div>
       </main>
+      <Footer />
     </>
   )
 }

@@ -23,7 +23,7 @@ export default function ArticleCard ({data, isInCarousel}) {
         onClick={() => {
           router.push(`${ROUTES.PRODUCT}/${data.productId}`)
         }}
-        className={`product-article relative flex flex-col justify-start min-w-[200px] h-[250px] rounded-lg bg-white shadow shadow-hoverColor mx-1 pb-4 my-2 border border-hoverColor ${carouselItemStylesClass}`}>
+        className={`product-article relative flex flex-col justify-start min-w-[200px] h-[250px] rounded-lg bg-white shadow shadow-hoverColor mx-1 pb-4 my-4 border border-hoverColor ${carouselItemStylesClass}`}>
         <div className="w-full h-[62%] border-b-[4px] border-secondaryBgColor bg-hoverColor text-shadowColor flex justify-center items-center rounded-t-lg">
           <Image 
             src={data?.imageUrl}
