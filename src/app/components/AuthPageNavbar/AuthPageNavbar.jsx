@@ -13,7 +13,7 @@ const pacifico = Pacifico({
   subsets: ["latin"]
 })
 
-function AuthPageNavbar (){
+function AuthPageNavbar ({ onSearchUpdate }){
   const router = useRouter()
 
   return (
@@ -34,10 +34,18 @@ function AuthPageNavbar (){
 
           {/* serach bar */}
           <div className="w-full relative flex items-center">
-            <input placeholder="search" 
-              className="pl-8 search-input rounded-xl w-full h-10 text-secondaryColor border-thirdColor bg-white shadow-sm shadow-shadowColor lg:pl-2 pr-[26px]
-              focus:outline-none placeholder:text-secondaryColor"
+            <form className="w-full" action="search bar" onSubmit={(e) => {
+                e.preventDefault()
+
+                const searchBarInputValue = (e.target[0].value).toLowerCase()
+                onSearchUpdate(searchBarInputValue)
+              }}
+            >
+              <input placeholder="search" 
+                className="pl-8 search-input rounded-xl w-full h-10 text-secondaryColor border-thirdColor bg-white shadow-sm shadow-shadowColor lg:pl-2 pr-[26px]
+                focus:outline-none placeholder:text-secondaryColor"
               />
+            </form>
             <SearchIcon alt="search icon"
               className="search-icon absolute left-1 lg:right-1 lg:border-l-[1px] lg:left-[90%] border-shadowColor pl-1"
             />

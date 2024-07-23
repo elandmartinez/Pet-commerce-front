@@ -4,10 +4,11 @@ import { Roboto } from "next/font/google";
 import { useDispatch, useSelector } from "react-redux";
 import AuthPageNavbar from "../components/AuthPageNavbar/AuthPageNavbar";
 import ArticleCard from "../components/articleCard/ArticleCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { updateProducts } from "@/lib/store/slices/productsSlice";
 import { fetchProducts } from "@/lib/services";
 import Footer from "../components/Footer/Footer";
+import DashboardTitle from "../components/DashboardTitle/DashboardTitle";
 
 const roboto = Roboto({
   weight: ["100", "300", "500"],
@@ -15,11 +16,23 @@ const roboto = Roboto({
   subsets: ["latin"]
 })
 
+
 export default function Dashboard () {
+  const [searchingBarValue, setSearchingBarValue] = useState("")
   const dispatch = useDispatch()
   const products = useSelector(state => state.products)
   const user = useSelector((state) => state.user)
-  const cartProducts = useSelector(state => state.cartProducts)
+
+  const filteredBySearchProducts = products.filter(product => {
+    return product.name.includes(searchingBarValue)
+  })
+  const isThereSearchingBarValue = searchingBarValue !== ""
+  const productsToDisplay = isThereSearchingBarValue ? filteredBySearchProducts : products 
+  const isProductsToDisplayEmpty = productsToDisplay.length === 0
+
+  function onSearchUpdate (newSearchValue) {
+    setSearchingBarValue(newSearchValue)
+  }
 
   useEffect(() => {
     async function getProductsData (token) {
@@ -38,18 +51,21 @@ export default function Dashboard () {
 
   return (
     <>
-      <AuthPageNavbar />
+      <AuthPageNavbar onSearchUpdate={onSearchUpdate} />
       <main className="w-full flex flex-col items-center px-2 pb-10">
         <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center" >
-          <h1 className="text-[30px] mb-6" >What does your pet need today?</h1>
-          <h2 className="text-[20px]" >We have for you...</h2>
+          <DashboardTitle
+            isProductsToDisplayEmpty={isProductsToDisplayEmpty}
+            isThereSearchingBarValue={isThereSearchingBarValue}
+            searchValue={searchingBarValue}
+          />
         </div>
         <div className={`${roboto.className} w-full grid-styles`}>
           {
             products
             ?
             (
-              products?.map((productData) => {
+              productsToDisplay?.map((productData) => {
                 return (
                   <ArticleCard data={productData} key={productData.productId}/>
                 )
