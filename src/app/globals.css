@@ -7,7 +7,9 @@
 :root {
   --main-bg-color: #e4ebed;
   --white: #ffffff;
-  --secondary-bg-color: rgb(70 255 163);
+  --secondary-bg-color: rgb(70 205 255);
+  --third-bg-color: #5d76d9;
+  --fourth-bg-color: #ff8924;
   --main-color: #1d2224;
   --secondary-color: #52748f;
   --third-color: #1f284b;
@@ -153,12 +155,6 @@ body::-webkit-scrollbar {
 .carousel-item {
   width: 200px;
   margin: 0 10px 0 10px;
-}
-
-@media (min-width: 640px) {
-  .profile-navbar-height {
-    height: calc(100vh - 82px)
-  }
 }
 
 @layer utilities {

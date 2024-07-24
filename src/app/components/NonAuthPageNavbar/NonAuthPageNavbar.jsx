@@ -12,7 +12,7 @@ const pacifico = Pacifico({
 //upper nav bar for pages that do not require auth to be in like login and sign-up for now
 function NonAuthPageNavbar (){  
   return (
-    <div className="relative p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor w-full">
+    <div className="relative w-full p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor md:py-6 lg:py-8">
       <div className={`w-full relative flex flex-col justify-center items-center bg-secondaryBgColor  h-[22%] lg:h-[30%%] max-h-[200px]`}>
         {/* logo element */}
         <img

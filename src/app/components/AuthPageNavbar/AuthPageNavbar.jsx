@@ -17,7 +17,7 @@ function AuthPageNavbar ({ onSearchUpdate }){
   const router = useRouter()
 
   return (
-    <div className="relative p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor w-full">
+    <div className="relative p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor w-full xl:px-16">
       <div className={` bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>
         {/* logo container, it has the logo and the title of it */}
         <Link href={ROUTES.DASHBOARD} className="link relative top-[2px] flex flex-col items-center text-[12px]">

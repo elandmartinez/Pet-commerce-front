@@ -23,7 +23,7 @@ import { ToastContainer, toast } from "react-toastify";
 const NoReviewsFoundComponent = function () {
   return (
     <>
-      <h1 className="text-center font-light">No reviews found, buy this product and be the first to leave a review!</h1>
+      <h1 className="text-center text-lg font-light">No reviews found, buy this product and be the first to leave a review!</h1>
     </>
   )
 }
@@ -61,6 +61,9 @@ export default function Page ({params}) {
   const dispatch = useDispatch()
   const products = useSelector(state => state.products)
   const localProductData = products.find(product => product.productId === parseInt(params.id))
+  const areThereProductReviews = productReviews.length > 0
+
+  console.log({productReviews})
 
   if(!localProductData) return (<LoadingProduct />)
 
@@ -129,14 +132,14 @@ export default function Page ({params}) {
     <>
     <ToastContainer />
       <AuthPageNavbar />
-      <main className="w-full">
+      <main className="w-full pb-10">
         {/* product card container */}
         <div className="w-[95%] max-w-[1000px] mt-16 mb-16 p-2 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor, sm:flex sm:w-[90%] lg:w-[80%]">
           <div className="flex flex-col sm:pr-4 sm:border-r border-shadowColor sm:w-[45%]">
             {/* product image */}
             <div className="w-full max-w-[400px] rounded-xl flex justify-center mx-auto mb-6">
               <Image src={localProductData.imageUrl} alt={localProductData.name} width={400} height={400}
-                className="rounded-xl"
+                className="rounded-xl object-none"
               />
             </div>
 
@@ -259,7 +262,7 @@ export default function Page ({params}) {
             <div className="w-full h-[1px] border border-shadow bg-secondaryColor"></div>
           </div>
 
-          {productReviews ? <ReviewsComponent reviews={productReviews} /> : <NoReviewsFoundComponent />}
+          {areThereProductReviews ? <ReviewsComponent reviews={productReviews} /> : <NoReviewsFoundComponent />}
         </section>
 
       </main>
