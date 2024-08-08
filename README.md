@@ -1,5 +1,18 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## using java server app
+
+login credentials must be "username" and "password"
+url in auth route for login:`${BASE_ENDPOINT}/login` 
+
+
+## using node.js app
+
+login credentials must be "email" and "password"
+url in auth route for login:`${BASE_ENDPOINT}/auth/login`
+
+
+
 ## Getting Started
 
 First, run the development server:

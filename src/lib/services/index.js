@@ -7,7 +7,7 @@ import { BASE_ENDPOINT, FETCH_HEADERS, FETCH_METHODS } from "@/utils/constants";
 
 export async function authUser (credentials) {
   try {
-    const res = await fetch(`${BASE_ENDPOINT}/login`, {
+    const res = await fetch(`${BASE_ENDPOINT}/auth/login`, {
       method: FETCH_METHODS.POST,
       headers: FETCH_HEADERS,
       body: JSON.stringify(credentials)
@@ -109,9 +109,11 @@ export async function postProductReview (reviewData, token) {
 
 //Orders service functions
 
-export async function fetchOrdersByClientId (clientId, token) {
+export async function fetchOrdersByClientId (customerId, token) {
   try {
-    const res = await fetch(`${BASE_ENDPOINT}/orders/get-by-client-id/${clientId}`, {
+    //java server fetch is "/orders/get-by-client-id/"
+    //node server fetch is "/orders/get-by-customer-id/"
+    const res = await fetch(`${BASE_ENDPOINT}/orders/get-by-customer-id/${customerId}`, {
       method: FETCH_METHODS.GET,
       headers: {
         ...FETCH_HEADERS,

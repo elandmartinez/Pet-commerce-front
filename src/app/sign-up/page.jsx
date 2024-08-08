@@ -41,9 +41,13 @@ function SignUp () {
             validationSchema={SIGN_UP_SCHEMA}
             onSubmit={async (values, {setSubmitting}) => {
               delete values.repeat_password
-              await createClient(values)
 
-              const userCredential = {username: values.email, password: values.password}
+              // this line is only neccessary with java server app
+              /* await createClient(values) */
+
+              //in java server app must use "username"
+              //in node.js server app  must use "email"
+              const userCredential = {email: values.email, password: values.password}
               const userToken = await authUser(userCredential)
 
               dispatch(updateUser({...values, ...userToken}))

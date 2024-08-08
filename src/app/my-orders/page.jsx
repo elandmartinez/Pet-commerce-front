@@ -12,15 +12,15 @@ import { updateOrders } from "@/lib/store/slices/ordersSlice"
 const NoOrdersFoundComponent = function () {
   return (
     <>
-      <h1 className="text-center font-bold">You dont have any orders yet</h1>
+      <h1 className="text-center text-secondaryColor text-[30px] font-thin">You dont have any orders yet</h1>
     </>
   )
 }
 
 const OrdersComponent = function ({ orders, router }) {
-  console.log({orders})
   return (
     <>
+    <div className="min-w-[400px] flex flex-col items-center px-2">
       {orders.map((order, index) => (
         <article
           onClick={() => {
@@ -37,7 +37,8 @@ const OrdersComponent = function ({ orders, router }) {
           {order.cardLastFourNumbers}
           </p>
         </article>            
-      ))}
+        ))}
+      </div>
     </>
   )
 }
@@ -49,19 +50,27 @@ export default function MyOrders () {
   const orders = useSelector(state => state.orders)
   const userData = useSelector(state => state.user)
   useEffect(() => {
-    const userId = userData.email;
+    const customerId = userData.id;
     async function getOrdersByClientId(clientId, token) {
-      const newOrders = await fetchOrdersByClientId(clientId, token)
+      console.log({clientId, token})
+
+      //java server app way to get new
+      /* const newOrders = await fetchOrdersByClientId(clientId, token) */
+      
+      //node.js server app way to get new Orders
+      const {body: newOrders} = await fetchOrdersByClientId(clientId, token)
       console.log({newOrders})
 
       dispatch(updateOrders(newOrders))
       setOrderData(newOrders)
 
-      if(newOrders !== orders) dispatch(udpdateOrders(newOrders))
+      if(newOrders !== orders) dispatch(updateOrders(newOrders))
     }
 
-    getOrdersByClientId(userId, userData.token)
+    getOrdersByClientId(customerId, userData.token)
   }, [])
+
+  const areThereOrders = orders.length > 0 || orderData.length > 0
 
   return (
     <>
@@ -69,7 +78,7 @@ export default function MyOrders () {
       <main className="w-full min-h-[100%] pt-[100px]">
         <h1 className="text-[20px] font-bold text-center">My Orders</h1>
         <div className="w-[90%] max-w-[500px] mt-6 mb-16 p-2 sm:p-6 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%] lg:w-[80%]">
-          {(orderData || orders) ? <OrdersComponent orders={orderData} router={router}/> : <NoOrdersFoundComponent />}
+          {areThereOrders ? <OrdersComponent orders={orderData} router={router}/> : <NoOrdersFoundComponent />}
         </div>
       </main>
     </>
