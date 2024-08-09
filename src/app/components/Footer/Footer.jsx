@@ -13,9 +13,9 @@ const pacifico = Pacifico({
 export default function Footer () {
   return (
     <footer
-      className="w-full mt-10 py-10 bg-secondaryBgColor text-third"
+      className="w-full mt-10 py-6 bg-secondaryBgColor text-third flex flex-col sm:flex-row justify-center"
     >
-      <div className="w-full max-w-[600px] mx-auto flex flex-col text-thirdColor items-center sm:flex-row sm:justify-evenly">
+      <div className="flex flex-col text-thirdColor items-center sm:justify-evenly sm:order-2">
         {FOOTER_LINKS.map((link, index) => (
           <a href={link.url} target="_blank" key={index}>
             <div className="footer-link__cont">
@@ -24,14 +24,14 @@ export default function Footer () {
           </a>
         ))}
       </div>
-      <div className="w-full flex flex-col items-center my-10">
+
+      <div className="flex flex-col items-center mt-4 mb-4 sm:order-1 sm:mr-10 lg:mr-16">
         <img
           src={pawLogo.src}
           alt={"Pet commerce logo"}
           className="w-20 h-20 fill-thirdColor mb-2 sm:w-24 sm:h-24"
         />
         <h2 className={`${pacifico.className} text-[20px] text-thirdColor sm:text-[30px]`}>Pet-commerce</h2>
-
       </div>
     </footer>
   )

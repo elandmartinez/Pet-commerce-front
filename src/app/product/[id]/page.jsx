@@ -17,6 +17,7 @@ import { updateProductReviews } from "@/lib/store/slices/productReviewsSlice";
 import { addProductToCart } from "@/lib/store/slices/cartProductsSlice";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "@/app/components/Footer/Footer";
 
 //TODO::implement logic where a comment box is displayed if the user has already bought that product, in other words, if the clien has any order with the product in it
 
@@ -62,8 +63,6 @@ export default function Page ({params}) {
   const products = useSelector(state => state.products)
   const localProductData = products.find(product => product.productId === parseInt(params.id))
   const areThereProductReviews = productReviews.length > 0
-
-  console.log({productReviews})
 
   if(!localProductData) return (<LoadingProduct />)
 
@@ -132,7 +131,7 @@ export default function Page ({params}) {
     <>
     <ToastContainer />
       <AuthPageNavbar />
-      <main className="w-full pb-10">
+      <main className="w-full pb-10 min-h-[60%]">
         {/* product card container */}
         <div className="w-[95%] max-w-[1000px] mt-16 mb-16 p-2 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor, sm:flex sm:w-[90%] lg:w-[80%]">
           <div className="flex flex-col sm:pr-4 sm:border-r border-shadowColor sm:w-[45%]">
@@ -266,6 +265,7 @@ export default function Page ({params}) {
         </section>
 
       </main>
+      <Footer />
     </>
   )
 }

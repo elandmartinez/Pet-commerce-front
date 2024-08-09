@@ -8,6 +8,7 @@ import { udpdateOrders } from "@/lib/store/slices/orderProductsIdsSlice"
 import { ROUTES } from "@/utils/constants"
 import { useRouter } from "next/navigation"
 import { updateOrders } from "@/lib/store/slices/ordersSlice"
+import Footer from "../components/Footer/Footer"
 
 const NoOrdersFoundComponent = function () {
   return (
@@ -52,14 +53,12 @@ export default function MyOrders () {
   useEffect(() => {
     const customerId = userData.id;
     async function getOrdersByClientId(clientId, token) {
-      console.log({clientId, token})
 
       //java server app way to get new
       /* const newOrders = await fetchOrdersByClientId(clientId, token) */
       
       //node.js server app way to get new Orders
       const {body: newOrders} = await fetchOrdersByClientId(clientId, token)
-      console.log({newOrders})
 
       dispatch(updateOrders(newOrders))
       setOrderData(newOrders)
@@ -75,12 +74,13 @@ export default function MyOrders () {
   return (
     <>
       <AuthPageNavbar />
-      <main className="w-full min-h-[100%] pt-[100px]">
+      <main className="w-full min-h-[60%] pt-[100px]">
         <h1 className="text-[20px] font-bold text-center">My Orders</h1>
         <div className="w-[90%] max-w-[500px] mt-6 mb-16 p-2 sm:p-6 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%] lg:w-[80%]">
           {areThereOrders ? <OrdersComponent orders={orderData} router={router}/> : <NoOrdersFoundComponent />}
         </div>
       </main>
+      <Footer />
     </>
   )
 }

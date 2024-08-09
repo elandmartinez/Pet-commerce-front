@@ -44,7 +44,7 @@ function Login () {
               setSubmitting(false)
               const credentials = {email: values.email, password: values.password}
               const data = await logUser(credentials)
-              console.log({data})
+              
               //java server app depuratedUserData
               /* const depuratedUserData = {
                 token: data.token,

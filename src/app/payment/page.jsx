@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { cleanOrderProductsIds } from "@/lib/store/slices/orderProductsIdsSlice";
 import { cleanCartProducts } from "@/lib/store/slices/cartProductsSlice";
 import { updateOrders } from "@/lib/store/slices/ordersSlice";
+import Footer from "../components/Footer/Footer";
 
 export default function Payment () {
   const router = useRouter()
@@ -23,7 +24,7 @@ export default function Payment () {
     <>
       <ToastContainer />
       <AuthPageNavbar />
-      <main className="w-full pb-10 text-mainColor">
+      <main className="w-full pb-10 text-mainColor min-h-[60%]">
         <div className="w-[90%] max-w-[400px] p-8 pt-[20px] mt-[100px] mb-16 bg-white rounded-xl mx-auto ">
           <Formik
             initialValues={PAYMENT_FORM_INITIAL_VALUES}
@@ -192,6 +193,7 @@ export default function Payment () {
           </Formik>
         </div>
       </main>
+      <Footer />
     </>
   )
 }

@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { ROUTES } from "@/utils/constants";
 import { udpdateOrderProductIds } from "@/lib/store/slices/orderProductsIdsSlice";
 import { updateOrders } from "@/lib/store/slices/ordersSlice";
+import Footer from "../components/Footer/Footer";
 
 function CartProducts ({cartProducts, handleDeleteProduct, totalProductsPrice}) {
   const dispatch = useDispatch()
@@ -95,7 +96,7 @@ export default function ShoppingCart () {
   return (
     <>
       <AuthPageNavbar />
-      <main className="w-full pb-10" >
+      <main className="w-full min-h-[60%]" >
         <div className="w-full min-h-[100%] pt-[100px] mb-16" >
           <h1 className="text-[20px] font-bold text-center" >My Articles</h1>
           <div className="w-[90%] max-w-[700px] mt-6 mb-16 p-6 sm:p-6 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%] lg:w-[80%]" >
@@ -103,6 +104,7 @@ export default function ShoppingCart () {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   )
 }

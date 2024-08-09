@@ -1,6 +1,7 @@
 "use client"
 
 import AuthPageNavbar from "@/app/components/AuthPageNavbar/AuthPageNavbar"
+import Footer from "@/app/components/Footer/Footer"
 import ArticleCard from "@/app/components/articleCard/ArticleCard"
 import { Roboto } from "next/font/google"
 import { useSelector } from "react-redux"
@@ -19,7 +20,7 @@ export default function Page({params}) {
   return (
     <>
       <AuthPageNavbar />
-      <main className="w-full">
+      <main className="w-full min-h-[56%]">
         <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center" >
             <h1 className="text-[30px] mb-6" >"{category}" products</h1>
             <h2 className="text-[15px]" >Result: {categoryProducts.length}</h2>
@@ -40,6 +41,7 @@ export default function Page({params}) {
             }
           </div>
       </main>
+      <Footer />
     </>
   )
 }

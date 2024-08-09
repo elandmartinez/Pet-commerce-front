@@ -2,6 +2,7 @@
 import PersonIcon from '@mui/icons-material/Person';
 import AuthPageNavbar from '../components/AuthPageNavbar/AuthPageNavbar';
 import { useSelector } from 'react-redux';
+import Footer from '../components/Footer/Footer';
 
 export default function Profile () {
   const user = useSelector(state => state.user)
@@ -9,7 +10,7 @@ export default function Profile () {
   return (
     <>
       <AuthPageNavbar />  
-      <main className='text-secondaryColor w-[90%] mx-auto'>
+      <main className='text-secondaryColor w-full min-h-[60%] mx-auto'>
         <div className='w-full px-2 mx-auto pb-10 max-w-[300px] flex flex-col justify-center items-center'>
           <div className='mt-20 mb-6 flex justify-center items-center w-[140px] h-[140px] border border-secondaryBgColor rounded-full'>
             <PersonIcon sx={
@@ -40,6 +41,7 @@ export default function Profile () {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   )
 }

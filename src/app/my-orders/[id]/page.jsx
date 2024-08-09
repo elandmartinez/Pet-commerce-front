@@ -1,6 +1,7 @@
 "use client"
 
 import AuthPageNavbar from "@/app/components/AuthPageNavbar/AuthPageNavbar"
+import Footer from "@/app/components/Footer/Footer"
 import { fetchProduct } from "@/lib/services"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -9,7 +10,7 @@ export default function Page ({params}) {
   const [orderProducts, setOrderProducts] = useState()
   const {token: userToken} = useSelector(state => state.user)
   const orders = useSelector(state => state.orders)
-  console.log({orders})
+
   const localOrderData = orders.find(order => order.orderId === parseInt(params.id)) || {}
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function Page ({params}) {
   return (
     <>
       <AuthPageNavbar />
-      <main className="w-full">
+      <main className="w-full min-h-[60%] pt-[100px]">
         <h1 className="mt-16 mb-4 text-center text-mainColor text-[25px]">Order No. {localOrderData.orderId}</h1>
         <div className="w-[90%] max-w-[500px] mb-16 p-4 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%]">
           <div className="w-full flex justify-between">
@@ -60,6 +61,7 @@ export default function Page ({params}) {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   )
 }
