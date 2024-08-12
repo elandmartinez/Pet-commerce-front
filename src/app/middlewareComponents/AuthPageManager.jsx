@@ -18,18 +18,21 @@ export default function AuthPageManager ({children}) {
   const isLoadingOnNoAuthRequiredPage = NO_AUTH_REQUIRED_PAGES.some(pagePath => currentUrlPathname.includes(pagePath))
 
   //here we redirect to login if user is trying to access a page that requires to be logged and user is not logged
-  if(isLoadingOnAuthRequiredPage & (user?.token === "")) {
+  if(isLoadingOnAuthRequiredPage && (user?.token === "")) {
     router.push(ROUTES.LOGIN)
   }
 
   //here we redirect to dashboard if user is trying to access a page that requires to not be logged and user is logged
-  if(isLoadingOnNoAuthRequiredPage & user?.token) {
+  if(isLoadingOnNoAuthRequiredPage && user?.token) {
+    console.log("redirecting to dashboard")
     router.push(ROUTES.DASHBOARD)
   }
 
-  if(!isLoadingOnAuthRequiredPage & !isLoadingOnNoAuthRequiredPage) {
+  if(!isLoadingOnAuthRequiredPage && !isLoadingOnNoAuthRequiredPage) {
     router.push(ROUTES.LOGIN)
   }
+
+  console.log({user, currentUrlPathname, isLoadingOnAuthRequiredPage, isLoadingOnNoAuthRequiredPage})
 
   return (
     <PersistGate load={0} persistor={persistor}>
