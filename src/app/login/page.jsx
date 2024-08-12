@@ -42,18 +42,21 @@ function Login () {
             validationSchema={LOGIN_SCHEMA}
             onSubmit={async (values, {setSubmitting}) => {
               setSubmitting(false)
-              const credentials = {email: values.email, password: values.password}
+              debugger
+              //for java backend app is username and password
+              //for node.js backend app is email and password
+              const credentials = {username: values.email, password: values.password}
               const data = await logUser(credentials)
-              
               //java server app depuratedUserData
-              /* const depuratedUserData = {
+              const depuratedUserData = {
                 token: data.token,
                 role: data.userData.role,
                 ...data.userData.client
-              } */
+              }
 
               //node.js server app depuratedData
-              const depuratedUserData = {...data.body}
+              /* const depuratedUserData = {...data.body} */
+
               dispatch(updateUser(depuratedUserData))
               router.push(ROUTES.DASHBOARD)
             }}

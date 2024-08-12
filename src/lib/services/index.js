@@ -7,7 +7,9 @@ import { BASE_ENDPOINT, FETCH_HEADERS, FETCH_METHODS } from "@/utils/constants";
 
 export async function authUser (credentials) {
   try {
-    const res = await fetch(`${BASE_ENDPOINT}/auth/login`, {
+    //Java server uses just "/loign" pathname
+    //Node.js server user "/auth/login" pathname
+    const res = await fetch(`${BASE_ENDPOINT}/login`, {
       method: FETCH_METHODS.POST,
       headers: FETCH_HEADERS,
       body: JSON.stringify(credentials)
@@ -113,7 +115,7 @@ export async function fetchOrdersByClientId (customerId, token) {
   try {
     //java server fetch is "/orders/get-by-client-id/"
     //node server fetch is "/orders/get-by-customer-id/"
-    const res = await fetch(`${BASE_ENDPOINT}/orders/get-by-customer-id/${customerId}`, {
+    const res = await fetch(`${BASE_ENDPOINT}/orders/get-by-client-id/${customerId}`, {
       method: FETCH_METHODS.GET,
       headers: {
         ...FETCH_HEADERS,

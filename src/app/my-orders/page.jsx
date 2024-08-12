@@ -54,11 +54,11 @@ export default function MyOrders () {
     const customerId = userData.id;
     async function getOrdersByClientId(clientId, token) {
 
-      //java server app way to get new
-      /* const newOrders = await fetchOrdersByClientId(clientId, token) */
+      //java server app way to get new orders
+      const newOrders = await fetchOrdersByClientId(clientId, token)
       
       //node.js server app way to get new Orders
-      const {body: newOrders} = await fetchOrdersByClientId(clientId, token)
+      /* const {body: newOrders} = await fetchOrdersByClientId(clientId, token) */
 
       dispatch(updateOrders(newOrders))
       setOrderData(newOrders)
