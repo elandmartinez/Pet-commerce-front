@@ -32,7 +32,9 @@ export default function AuthPageManager ({children}) {
       router.push(ROUTES.DASHBOARD)
     }
 
-    if(!isLoadingOnAuthRequiredPage && !isLoadingOnNoAuthRequiredPage) {
+    console.log({currentUrlPathname})
+
+    if((!isLoadingOnAuthRequiredPage && !isLoadingOnNoAuthRequiredPage) || currentUrlPathname === "" || currentUrlPathname === "/") {
       router.push(ROUTES.LOGIN)
     }
 
