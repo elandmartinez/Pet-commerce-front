@@ -11,8 +11,8 @@ import { updateCartProducts } from "@/lib/store/slices/cartProductsSlice";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/utils/constants";
 import { udpdateOrderProductIds } from "@/lib/store/slices/orderProductsIdsSlice";
-import { updateOrders } from "@/lib/store/slices/ordersSlice";
 import Footer from "../components/Footer/Footer";
+import AuthPageManager from "../middlewareComponents/AuthPageManager";
 
 function CartProducts ({cartProducts, handleDeleteProduct, totalProductsPrice}) {
   const dispatch = useDispatch()
@@ -94,7 +94,7 @@ export default function ShoppingCart () {
 
   const isCartEmpty = cartProductsState.length === 0
   return (
-    <>
+    <AuthPageManager>
       <AuthPageNavbar />
       <main className="w-full min-h-[60%]" >
         <div className="w-full min-h-[100%] pt-[100px] mb-16" >
@@ -105,6 +105,6 @@ export default function ShoppingCart () {
         </div>
       </main>
       <Footer />
-    </>
+    </AuthPageManager>
   )
 }

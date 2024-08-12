@@ -18,6 +18,7 @@ import { addProductToCart } from "@/lib/store/slices/cartProductsSlice";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import Footer from "@/app/components/Footer/Footer";
+import AuthPageManager from "@/app/middlewareComponents/AuthPageManager";
 
 //TODO::implement logic where a comment box is displayed if the user has already bought that product, in other words, if the clien has any order with the product in it
 
@@ -128,8 +129,8 @@ export default function Page ({params}) {
   }, [])
 
   return (
-    <>
-    <ToastContainer />
+    <AuthPageManager>
+      <ToastContainer />
       <AuthPageNavbar />
       <main className="w-full pb-10 min-h-[60%]">
         {/* product card container */}
@@ -138,7 +139,7 @@ export default function Page ({params}) {
             {/* product image */}
             <div className="w-full max-w-[400px] rounded-xl flex justify-center mx-auto mb-6">
               <Image src={localProductData.imageUrl} alt={localProductData.name} width={400} height={400}
-                className="rounded-xl object-none"
+                className="rounded-xl object-none" priority
               />
             </div>
 
@@ -266,6 +267,6 @@ export default function Page ({params}) {
 
       </main>
       <Footer />
-    </>
+    </AuthPageManager>
   )
 }

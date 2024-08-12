@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
 import { authUser } from "@/lib/services";
 import { ToastContainer, toast } from "react-toastify";
+import AuthPageManager from "../middlewareComponents/AuthPageManager";
 
 function Login () {
   const router = useRouter()
@@ -29,7 +30,7 @@ function Login () {
   }
 
   return (
-    <>
+    <AuthPageManager>
       <ToastContainer />
       <div className="w-full h-full pb-10 overflow-y-scroll">
         <NonAuthPageNavbar /> 
@@ -125,7 +126,7 @@ function Login () {
           </Formik>
         </div>
       </div>
-    </>
+    </AuthPageManager>
   )
 }
 

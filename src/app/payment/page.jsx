@@ -13,6 +13,7 @@ import { cleanOrderProductsIds } from "@/lib/store/slices/orderProductsIdsSlice"
 import { cleanCartProducts } from "@/lib/store/slices/cartProductsSlice";
 import { updateOrders } from "@/lib/store/slices/ordersSlice";
 import Footer from "../components/Footer/Footer";
+import AuthPageManager from "../middlewareComponents/AuthPageManager";
 
 export default function Payment () {
   const router = useRouter()
@@ -21,7 +22,7 @@ export default function Payment () {
   const dispatch = useDispatch()
 
   return (
-    <>
+    <AuthPageManager>
       <ToastContainer />
       <AuthPageNavbar />
       <main className="w-full pb-10 text-mainColor min-h-[60%]">
@@ -194,6 +195,6 @@ export default function Payment () {
         </div>
       </main>
       <Footer />
-    </>
+    </AuthPageManager>
   )
 }

@@ -2,6 +2,7 @@
 
 import AuthPageNavbar from "@/app/components/AuthPageNavbar/AuthPageNavbar"
 import Footer from "@/app/components/Footer/Footer"
+import AuthPageManager from "@/app/middlewareComponents/AuthPageManager"
 import { fetchProduct } from "@/lib/services"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -28,7 +29,7 @@ export default function Page ({params}) {
     getOrderProducts()
   }, [])
   return (
-    <>
+    <AuthPageManager>
       <AuthPageNavbar />
       <main className="w-full min-h-[60%] pt-[100px]">
         <h1 className="mt-16 mb-4 text-center text-mainColor text-[25px]">Order No. {localOrderData.orderId}</h1>
@@ -62,6 +63,6 @@ export default function Page ({params}) {
         </div>
       </main>
       <Footer />
-    </>
+    </AuthPageManager>
   )
 }

@@ -9,6 +9,7 @@ import { updateProducts } from "@/lib/store/slices/productsSlice";
 import { fetchProducts } from "@/lib/services";
 import Footer from "../components/Footer/Footer";
 import DashboardTitle from "../components/DashboardTitle/DashboardTitle";
+import AuthPageManager from "../middlewareComponents/AuthPageManager";
 
 const roboto = Roboto({
   weight: ["100", "300", "500"],
@@ -50,7 +51,7 @@ export default function Dashboard () {
   }, [])
 
   return (
-    <>
+    <AuthPageManager>
       <AuthPageNavbar onSearchUpdate={onSearchUpdate} />
       <main className="w-full flex flex-col items-center px-2 pb-10">
         <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center" >
@@ -77,6 +78,6 @@ export default function Dashboard () {
         </div>
       </main>
       <Footer />
-    </>
+    </AuthPageManager>
   )
 }

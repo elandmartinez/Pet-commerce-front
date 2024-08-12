@@ -4,11 +4,11 @@ import { useEffect, useState } from "react"
 import AuthPageNavbar from "../components/AuthPageNavbar/AuthPageNavbar"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchOrdersByClientId } from "@/lib/services"
-import { udpdateOrders } from "@/lib/store/slices/orderProductsIdsSlice"
 import { ROUTES } from "@/utils/constants"
 import { useRouter } from "next/navigation"
 import { updateOrders } from "@/lib/store/slices/ordersSlice"
 import Footer from "../components/Footer/Footer"
+import AuthPageManager from "../middlewareComponents/AuthPageManager"
 
 const NoOrdersFoundComponent = function () {
   return (
@@ -72,7 +72,7 @@ export default function MyOrders () {
   const areThereOrders = orders.length > 0 || orderData.length > 0
 
   return (
-    <>
+    <AuthPageManager>
       <AuthPageNavbar />
       <main className="w-full min-h-[60%] pt-[100px]">
         <h1 className="text-[20px] font-bold text-center">My Orders</h1>
@@ -81,6 +81,6 @@ export default function MyOrders () {
         </div>
       </main>
       <Footer />
-    </>
+    </AuthPageManager>
   )
 }

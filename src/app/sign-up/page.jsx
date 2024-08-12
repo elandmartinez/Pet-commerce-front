@@ -12,6 +12,7 @@ import { updateUser } from "@/lib/store/slices/userSlice";
 import { useRouter } from "next/navigation";
 import { postClient } from "@/lib/services";
 import { ToastContainer, toast } from "react-toastify";
+import AuthPageManager from "../middlewareComponents/AuthPageManager";
 
 
 function SignUp () {
@@ -31,7 +32,7 @@ function SignUp () {
   }
 
   return (
-    <>
+    <AuthPageManager>
       <ToastContainer />
       <div className="w-full pb-10">
         <NonAuthPageNavbar />
@@ -162,7 +163,7 @@ function SignUp () {
           </Formik>
         </div>
       </ div>
-    </>
+      </AuthPageManager>
   )
 }
 
