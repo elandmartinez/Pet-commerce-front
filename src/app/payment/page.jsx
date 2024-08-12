@@ -11,7 +11,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { cleanOrderProductsIds } from "@/lib/store/slices/orderProductsIdsSlice";
 import { cleanCartProducts } from "@/lib/store/slices/cartProductsSlice";
-import { updateOrders } from "@/lib/store/slices/ordersSlice";
 import Footer from "../components/Footer/Footer";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
 

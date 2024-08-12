@@ -20,8 +20,6 @@ import { ToastContainer, toast } from "react-toastify";
 import Footer from "@/app/components/Footer/Footer";
 import AuthPageManager from "@/app/middlewareComponents/AuthPageManager";
 
-//TODO::implement logic where a comment box is displayed if the user has already bought that product, in other words, if the clien has any order with the product in it
-
 const NoReviewsFoundComponent = function () {
   return (
     <>

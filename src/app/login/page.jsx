@@ -43,7 +43,7 @@ function Login () {
             validationSchema={LOGIN_SCHEMA}
             onSubmit={async (values, {setSubmitting}) => {
               setSubmitting(false)
-              debugger
+
               //for java backend app is username and password
               //for node.js backend app is email and password
               const credentials = {username: values.email, password: values.password}

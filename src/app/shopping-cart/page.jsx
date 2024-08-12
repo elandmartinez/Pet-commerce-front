@@ -11,6 +11,7 @@ import { updateCartProducts } from "@/lib/store/slices/cartProductsSlice";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/utils/constants";
 import { udpdateOrderProductIds } from "@/lib/store/slices/orderProductsIdsSlice";
+import { updateOrders } from "@/lib/store/slices/ordersSlice";
 import Footer from "../components/Footer/Footer";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
 
