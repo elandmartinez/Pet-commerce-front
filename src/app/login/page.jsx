@@ -2,7 +2,7 @@
 
 import { Formik, Form, ErrorMessage } from "formik"
 import { LOGIN_SCHEMA } from "@/utils/schemas";
-import { LOGIN_FORM_INITAL_VALUES, ROUTES } from "../../utils/constants";
+import { LOGIN_FORM_INITAL_VALUES, ROUTES, redirectAndDisplayLoadingOverlay } from "../../utils/constants";
 import Link from "next/link"
 import TextField from '@mui/material/TextField';
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar
 import { authUser } from "@/lib/services";
 import { ToastContainer, toast } from "react-toastify";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
+import { updateLoadingOverlayValue } from "@/lib/store/slices/loadingOverlaySlice";
 
 function Login () {
   const router = useRouter()
@@ -59,7 +60,15 @@ function Login () {
               /* const depuratedUserData = {...data.body} */
 
               dispatch(updateUser(depuratedUserData))
-              router.push(ROUTES.DASHBOARD)
+              //router.push(ROUTES.DASHBOARD)
+              redirectAndDisplayLoadingOverlay(
+                router,
+                ROUTES.DASHBOARD,
+                dispatch,
+                updateLoadingOverlayValue,
+                {active:true}
+              )
+
             }}
           >
             {({

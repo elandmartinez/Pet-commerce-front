@@ -54,7 +54,7 @@ export default function Dashboard () {
   return (
     <AuthPageManager>
       <AuthPageNavbar onSearchUpdate={onSearchUpdate} />
-      <LoadingOverlay message={"Loading..."} />
+      <LoadingOverlay active={true} message={"Loading..."} />
       <main className="w-full flex flex-col items-center px-2 pb-10">
         <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center">
           <DashboardTitle

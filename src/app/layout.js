@@ -2,6 +2,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/lib/provider/index";
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingOverlay from "./components/LoadingOverlay/LoadingOverlay";
 
 //here we obtain the roboto font and specify the weight, styles,
 //and subsets that we want to get it with
@@ -25,7 +26,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${roboto.className} relative bg-mainBgColor text-mainColor`}>
         <ReduxProvider>
-          {/* the navbar component goes above all the other component rendering no matter what page is */}
+          <LoadingOverlay />
           {children}
         </ReduxProvider>
       </body>
