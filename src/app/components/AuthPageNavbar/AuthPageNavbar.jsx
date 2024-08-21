@@ -6,7 +6,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import NavMenuModal from "../NavMenuModal/NavMenuModal";
 import Link from "next/link";
 import { PRODUCTS_CATEGORIES_ARRAY, ROUTES } from "@/utils/constants";
-import { useRouter } from "next/navigation";
 
 const pacifico = Pacifico({
   weight: ["400"],
@@ -14,8 +13,6 @@ const pacifico = Pacifico({
 })
 
 function AuthPageNavbar ({ onSearchUpdate }){
-  const router = useRouter()
-
   return (
     <div className="relative p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor w-full xl:px-16">
       <div className={` bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>

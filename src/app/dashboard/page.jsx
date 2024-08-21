@@ -10,6 +10,7 @@ import { fetchProducts } from "@/lib/services";
 import Footer from "../components/Footer/Footer";
 import DashboardTitle from "../components/DashboardTitle/DashboardTitle";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 
 const roboto = Roboto({
   weight: ["100", "300", "500"],
@@ -53,8 +54,9 @@ export default function Dashboard () {
   return (
     <AuthPageManager>
       <AuthPageNavbar onSearchUpdate={onSearchUpdate} />
+      <LoadingOverlay message={"Loading..."} />
       <main className="w-full flex flex-col items-center px-2 pb-10">
-        <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center" >
+        <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center">
           <DashboardTitle
             isProductsToDisplayEmpty={isProductsToDisplayEmpty}
             isThereSearchingBarValue={isThereSearchingBarValue}
