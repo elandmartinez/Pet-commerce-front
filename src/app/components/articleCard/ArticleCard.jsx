@@ -2,19 +2,13 @@
 
 import Image from "next/image"
 import React from "react"
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useDispatch } from "react-redux";
-import { addProductToCart } from "@/lib/store/slices/cartProductsSlice";
 import { useRouter } from "next/navigation";
-import { ROUTES, redirectAndDisplayLoadingOverlay } from "@/utils/constants";
-import { updateLoadingOverlayValue } from "@/lib/store/slices/loadingOverlaySlice";
-
+import { ROUTES } from "@/utils/constants";
 
 //make a toast appear every time a product is added to the cart
 
-export default function ArticleCard ({data, isInCarousel}) {
+export default function ArticleCard ({data, setLoadingOverlayStatus}) {
   const router = useRouter()
-  const dispatch = useDispatch()
 
   const carouselItemStylesClass = "carousel-item"
   //  var shouldApplyCarouselItemStyles = false
@@ -23,14 +17,8 @@ export default function ArticleCard ({data, isInCarousel}) {
   return (
       <article
         onClick={() => {
-          //router.push(`${ROUTES.PRODUCT}/${data.productId}`)
-          redirectAndDisplayLoadingOverlay(
-            router,
-            `${ROUTES.PRODUCT}/${data.productId}`,
-            dispatch,
-            updateLoadingOverlayValue,
-            {acive:true}
-          )
+          setLoadingOverlayStatus({active: true})
+          router.push(`${ROUTES.PRODUCT}/${data.productId}`)
         }}
         className={`product-article relative flex flex-col justify-start min-w-[200px] h-[250px] rounded-lg bg-white shadow shadow-hoverColor mx-1 pb-4 my-4 border border-hoverColor ${carouselItemStylesClass}`}>
         <div className="w-full h-[62%] border-b-[4px] border-secondaryBgColor bg-hoverColor text-shadowColor flex justify-center items-center rounded-t-lg">

@@ -4,13 +4,17 @@ import AuthPageNavbar from '../components/AuthPageNavbar/AuthPageNavbar';
 import { useSelector } from 'react-redux';
 import Footer from '../components/Footer/Footer';
 import AuthPageManager from '../middlewareComponents/AuthPageManager';
+import LoadingOverlay from '../components/LoadingOverlay/LoadingOverlay';
+import { useState } from 'react';
 
 export default function Profile () {
+  const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const user = useSelector(state => state.user)
 
   return (
     <AuthPageManager>
-      <AuthPageNavbar />  
+      <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus} />  
+      <LoadingOverlay active={loadingOverlayStatus} />
       <main className='text-secondaryColor w-full min-h-[60%] mx-auto'>
         <div className='w-full px-2 mx-auto pb-10 max-w-[300px] flex flex-col justify-center items-center'>
           <div className='mt-20 mb-6 flex justify-center items-center w-[140px] h-[140px] border border-secondaryBgColor rounded-full'>

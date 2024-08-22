@@ -81,12 +81,6 @@ export const FETCH_METHODS = {
   DELETE: "DELETE"
 }
 
-export function redirectAndDisplayLoadingOverlay (router, routeToRedirectTo, dispatch, updateLoadingOverlay, newLoadingOverlayValue){
-  console.log({routeToRedirectTo, updateLoadingOverlay, newLoadingOverlayValue})
-  dispatch(updateLoadingOverlay(newLoadingOverlayValue))
-  router.push(routeToRedirectTo)
-}
-
 export const initialLoadingOverlayValue = {active: false}
 
 export const BASE_ENDPOINT = "https://pet-commerce-back.fly.dev/api"

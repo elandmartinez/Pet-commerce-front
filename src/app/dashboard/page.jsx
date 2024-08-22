@@ -21,6 +21,7 @@ const roboto = Roboto({
 
 export default function Dashboard () {
   const [searchingBarValue, setSearchingBarValue] = useState("")
+  const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const dispatch = useDispatch()
   const products = useSelector(state => state.products)
   const user = useSelector((state) => state.user)
@@ -34,6 +35,9 @@ export default function Dashboard () {
 
   function onSearchUpdate (newSearchValue) {
     setSearchingBarValue(newSearchValue)
+
+    //setting LoadingOverlayStatus to false because this function activates when 
+    setLoadingOverlayStatus(false)
   }
 
   useEffect(() => {
@@ -51,10 +55,12 @@ export default function Dashboard () {
     getProductsData(user.token)
   }, [])
 
+  console.log({setLoadingOverlayStatus})
+
   return (
     <AuthPageManager>
-      <AuthPageNavbar onSearchUpdate={onSearchUpdate} />
-      <LoadingOverlay active={true} message={"Loading..."} />
+      <LoadingOverlay active={loadingOverlayStatus} />
+      <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus} onSearchUpdate={onSearchUpdate}/>
       <main className="w-full flex flex-col items-center px-2 pb-10">
         <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center">
           <DashboardTitle
@@ -70,7 +76,7 @@ export default function Dashboard () {
             (
               productsToDisplay?.map((productData) => {
                 return (
-                  <ArticleCard data={productData} key={productData.productId}/>
+                  <ArticleCard data={productData} key={productData.productId} setLoadingOverlayStatus={setLoadingOverlayStatus}/>
                 )
               })
             )

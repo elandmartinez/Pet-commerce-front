@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux"
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Button from '@mui/material/Button';
-import LoadingProduct from "@/app/components/LoadingProduct/LoadingProduct";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -19,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import Footer from "@/app/components/Footer/Footer";
 import AuthPageManager from "@/app/middlewareComponents/AuthPageManager";
+import LoadingOverlay from "@/app/components/LoadingOverlay/LoadingOverlay";
 
 const NoReviewsFoundComponent = function () {
   return (
@@ -54,6 +54,7 @@ const ReviewsComponent = function ({ reviews }) {
 }
 
 export default function Page ({params}) {
+  const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const [productReviews, setRpoductReviews] = useState([]);
   const [productAmountToBuy, setProductAmountToBuy] = useState(0)
   const router = useRouter();
@@ -62,8 +63,6 @@ export default function Page ({params}) {
   const products = useSelector(state => state.products)
   const localProductData = products.find(product => product.productId === parseInt(params.id))
   const areThereProductReviews = productReviews.length > 0
-
-  if(!localProductData) return (<LoadingProduct />)
 
   //fucntion that handles the set of the state productAmountToBuy, it makes sure that the amount is not higher that the current stock, and not lower than 0
   function handleProductAmountToBuyChange (action) {
@@ -76,6 +75,7 @@ export default function Page ({params}) {
         if(productAmountToBuy === 0) return
         setProductAmountToBuy(productAmountToBuy - 1)
         break;
+      default:
     }
   }
 
@@ -84,6 +84,7 @@ export default function Page ({params}) {
       toast.error("Amount selected for product is 0, please set at least 1")
       return
     }
+    setLoadingOverlayStatus(true)
     dispatch(addProductToCart({productData: localProductData, amountToAdd: productAmountToBuy}))
     router.push(`${ROUTES.SHOPPING_CART}`)
 
@@ -124,12 +125,13 @@ export default function Page ({params}) {
     }
 
     getProductReviews(productId, userToken)
-  }, [])
+  }, [dispatch, localProductData?.productId, userToken])
 
   return (
     <AuthPageManager>
       <ToastContainer />
       <AuthPageNavbar />
+      <LoadingOverlay active={loadingOverlayStatus}/>
       <main className="w-full pb-10 min-h-[60%]">
         {/* product card container */}
         <div className="w-[95%] max-w-[1000px] mt-16 mb-16 p-2 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor, sm:flex sm:w-[90%] lg:w-[80%]">
@@ -137,7 +139,7 @@ export default function Page ({params}) {
             {/* product image */}
             <div className="w-full max-w-[400px] rounded-xl flex justify-center mx-auto mb-6">
               <Image src={localProductData.imageUrl} alt={localProductData.name} width={400} height={400}
-                className="rounded-xl object-none" priority
+                className="rounded-xl object-contain" priority
               />
             </div>
 
@@ -246,7 +248,7 @@ export default function Page ({params}) {
           <h1 className="text-[20px] text-center mt-4" >Related products</h1>
           <div className="carousel w-full overflow-x-scroll flex py-4">
               {relatedProducts.map((product, index) => (
-                <ArticleCard data={product} isInCarousel={true} key={index}/>
+                <ArticleCard data={product} isInCarousel={true} key={index} setLoadingOverlayStatus={setLoadingOverlayStatus}/>
               ))}
           </div>
         </section>

@@ -1,18 +1,15 @@
 'use client'
 
-import { updateLoadingOverlayValue } from "@/lib/store/slices/loadingOverlaySlice"
-import { ROUTES, redirectAndDisplayLoadingOverlay } from "@/utils/constants"
 import { useRouter } from "next/navigation"
-import { useDispatch } from "react-redux"
 
 export default function Home () {
   const router = useRouter() 
-  const dispatch = useDispatch()
 
-  redirectAndDisplayLoadingOverlay(router, ROUTES.LOGIN, dispatch, updateLoadingOverlayValue, {active: true})
+  router.push("/login")
 
   return (
-    <>
-    </>
+    <div className="w-full h-full pt-[350px]">
+      <h1 className="text-center text-[40px] font-thin">Loading login...</h1>
+    </div>
   )
 }

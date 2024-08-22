@@ -13,7 +13,7 @@ import { cleanOrderProductsIds } from '@/lib/store/slices/orderProductsIdsSlice'
 import { cleanUser } from '@/lib/store/slices/userSlice';
 import { cleanOrders } from '@/lib/store/slices/ordersSlice';
 
-export default function NavMenuModal() {
+export default function NavMenuModal({setLoadingOverlayStatus}) {
   const dispatch = useDispatch()
   const [showSideBar, setShowSideBar] = React.useState(false);
 
@@ -73,7 +73,11 @@ export default function NavMenuModal() {
           <ul className='w-full'>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={ROUTES.PROFILE} className='flex w-full h-full p-4 pl-2 link'>
+                <Link
+                  href={ROUTES.PROFILE}
+                  className='flex w-full h-full p-4 pl-2 link'
+                  onClick={() => {setLoadingOverlayStatus(true)}}
+                >
                   <PersonIcon className='ml-1 mr-2' />
                   <p>My profile</p>
                 </Link>
@@ -81,7 +85,11 @@ export default function NavMenuModal() {
             </li>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={ROUTES.SHOPPING_CART} className='flex w-full h-full p-4 pl-2 link'>
+                <Link
+                  href={ROUTES.SHOPPING_CART}
+                  className='flex w-full h-full p-4 pl-2 link'
+                  onClick={() => {setLoadingOverlayStatus(true)}}
+                >
                   <ShoppingCartIcon className='ml-1 mr-2' />
                   <p>Shopping cart</p>
                 </Link>
@@ -89,7 +97,11 @@ export default function NavMenuModal() {
             </li>
             <li className='w-full'>
               <div className='w-full hover:bg-hoverColor transition-all'>
-                <Link href={ROUTES.MY_ORDERS} className='flex w-full h-full p-4 pl-2 link'>
+                <Link
+                  href={ROUTES.MY_ORDERS}
+                  className='flex w-full h-full p-4 pl-2 link'
+                  onClick={() => {setLoadingOverlayStatus(true)}}
+                >
                   <ShoppingBagIcon className='ml-1 mr-2' />
                   <p>My Orders</p>
                 </Link>
@@ -97,7 +109,14 @@ export default function NavMenuModal() {
             </li>
             <li className='w-full text-warningColor' >
               <div className='w-full hover:bg-warningHoverColor transition-all'>
-                <Link href={ROUTES.LOGIN} onClick={handleLogOut}className='flex w-full h-full p-4 pl-2 link'>
+                <Link
+                  href={ROUTES.LOGIN}
+                    className='flex w-full h-full p-4 pl-2 link'
+                    onClick={() => {
+                      setLoadingOverlayStatus(true)
+                      handleLogOut()
+                    }}
+                  >
                   <ExitToAppIcon className='ml-1 mr-2' sx={{fill: "#fa5c8e"}} />
                   <p>Log out</p>
                 </Link>

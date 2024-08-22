@@ -2,7 +2,7 @@
 
 import { Formik, Form, ErrorMessage } from "formik"
 import { LOGIN_SCHEMA } from "@/utils/schemas";
-import { LOGIN_FORM_INITAL_VALUES, ROUTES, redirectAndDisplayLoadingOverlay } from "../../utils/constants";
+import { LOGIN_FORM_INITAL_VALUES, ROUTES } from "../../utils/constants";
 import Link from "next/link"
 import TextField from '@mui/material/TextField';
 import { useDispatch } from "react-redux";
@@ -12,9 +12,11 @@ import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar
 import { authUser } from "@/lib/services";
 import { ToastContainer, toast } from "react-toastify";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
-import { updateLoadingOverlayValue } from "@/lib/store/slices/loadingOverlaySlice";
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
+import { useState } from "react";
 
 function Login () {
+  const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -33,6 +35,7 @@ function Login () {
   return (
     <AuthPageManager>
       <ToastContainer />
+      <LoadingOverlay active={loadingOverlayStatus}/>
       <div className="w-full h-full pb-10 overflow-y-scroll">
         <NonAuthPageNavbar /> 
         <div className="relative z-20 mt-20 lg:mt-20 login-page w-full flex items-start lg:text-lg">
@@ -48,27 +51,25 @@ function Login () {
               //for java backend app is username and password
               //for node.js backend app is email and password
               const credentials = {username: values.email, password: values.password}
-              const data = await logUser(credentials)
-              //java server app depuratedUserData
-              const depuratedUserData = {
-                token: data.token,
-                role: data.userData.role,
-                ...data.userData.client
+              try {
+                setLoadingOverlayStatus(true)
+                const data = await logUser(credentials)
+                //java server app depuratedUserData
+                const depuratedUserData = {
+                  token: data.token,
+                  role: data.userData.role,
+                  ...data.userData.client
+                }
+
+                //node.js server app depuratedData
+                /* const depuratedUserData = {...data.body} */
+
+                dispatch(updateUser(depuratedUserData))
+                router.push(ROUTES.DASHBOARD)
+              } catch (error) {
+                setLoadingOverlayStatus(false)
+                throw new Error(error)
               }
-
-              //node.js server app depuratedData
-              /* const depuratedUserData = {...data.body} */
-
-              dispatch(updateUser(depuratedUserData))
-              //router.push(ROUTES.DASHBOARD)
-              redirectAndDisplayLoadingOverlay(
-                router,
-                ROUTES.DASHBOARD,
-                dispatch,
-                updateLoadingOverlayValue,
-                {active:true}
-              )
-
             }}
           >
             {({

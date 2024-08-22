@@ -19,7 +19,6 @@ import orderProductsIdsSlice from './slices/orderProductsIdsSlice';
 import productReviewsSlice from './slices/productReviewsSlice';
 import addressesSlice from './slices/addressesSlice';
 import ordersSlice from './slices/ordersSlice';
-import loadingOverlaySlice from './slices/loadingOverlaySlice';
 
 const rootReducer = combineReducers({
   user: userSlice,
@@ -28,8 +27,7 @@ const rootReducer = combineReducers({
   orderProductsIds: orderProductsIdsSlice,
   reviews: productReviewsSlice,
   addresses: addressesSlice,
-  orders: ordersSlice,
-  loadingOverlay: loadingOverlaySlice
+  orders: ordersSlice
 })
 
 const persistConfig = {

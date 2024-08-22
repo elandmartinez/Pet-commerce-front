@@ -13,9 +13,12 @@ import { useRouter } from "next/navigation";
 import { postClient } from "@/lib/services";
 import { ToastContainer, toast } from "react-toastify";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
+import { useState } from "react";
 
 
 function SignUp () {
+  const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const dispatch = useDispatch()
   const router = useRouter()
   //creating a user is successful, now dispatch the data to the store and make a push in github
@@ -34,8 +37,9 @@ function SignUp () {
   return (
     <AuthPageManager>
       <ToastContainer />
-      <div className="w-full pb-10">
+      <div className="w-full pb-10 relative">
         <NonAuthPageNavbar />
+        <LoadingOverlay active={loadingOverlayStatus} />
         <div className="relative z-20 mt-10 lg:mt-20 h-full w-full flex items-center lg:text-lg ">
           <Formik
             initialValues={SIGN_UP_FORM_INITIAL_VALUES}
@@ -44,18 +48,26 @@ function SignUp () {
               delete values.repeat_password
 
               // this line is only neccessary with java server app
-              await createClient(values)
+              try {
+                setLoadingOverlayStatus(true)
+                await createClient(values)
 
-              //in java server app must use "username"
-              //in node.js server app  must use "email"
-              const userCredential = {username: values.email, password: values.password}
-              const userToken = await authUser(userCredential)
+                //in java server app must use "username"
+                //in node.js server app  must use "email"
+                const userCredential = {username: values.email, password: values.password}
+                const userToken = await authUser(userCredential)
+                
 
-              dispatch(updateUser({...values, ...userToken}))
+                dispatch(updateUser({...values, ...userToken}))
 
-              router.push(ROUTES.DASHBOARD)
+                router.push(ROUTES.DASHBOARD)
 
-              setSubmitting(false)
+                setSubmitting(false)        
+              } catch (error) {
+                setLoadingOverlayStatus(false)
+                throw new Error(error) 
+              }
+        
             }}
           >
             {({

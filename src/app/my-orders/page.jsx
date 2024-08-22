@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation"
 import { updateOrders } from "@/lib/store/slices/ordersSlice"
 import Footer from "../components/Footer/Footer"
 import AuthPageManager from "../middlewareComponents/AuthPageManager"
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay"
 
 const NoOrdersFoundComponent = function () {
   return (
@@ -45,6 +46,7 @@ const OrdersComponent = function ({ orders, router }) {
 }
 
 export default function MyOrders () {
+  const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const [orderData, setOrderData] = useState([])
   const dispatch = useDispatch()
   const router = useRouter()
@@ -73,7 +75,8 @@ export default function MyOrders () {
 
   return (
     <AuthPageManager>
-      <AuthPageNavbar />
+      <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus}/>
+      <LoadingOverlay active={loadingOverlayStatus} />
       <main className="w-full min-h-[60%] pt-[100px]">
         <h1 className="text-[20px] font-bold text-center">My Orders</h1>
         <div className="w-[90%] max-w-[500px] mt-6 mb-16 p-2 sm:p-6 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%] lg:w-[80%]">

@@ -13,8 +13,11 @@ import { cleanOrderProductsIds } from "@/lib/store/slices/orderProductsIdsSlice"
 import { cleanCartProducts } from "@/lib/store/slices/cartProductsSlice";
 import Footer from "../components/Footer/Footer";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
+import { useState } from "react";
 
 export default function Payment () {
+  const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const router = useRouter()
   const orderProductsIds = useSelector(state => state.orderProductsIds)
   const user = useSelector(state => state.user)
@@ -23,7 +26,8 @@ export default function Payment () {
   return (
     <AuthPageManager>
       <ToastContainer />
-      <AuthPageNavbar />
+      <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus} />
+      <LoadingOverlay active={loadingOverlayStatus} />
       <main className="w-full pb-10 text-mainColor min-h-[60%]">
         <div className="w-[90%] max-w-[400px] p-8 pt-[20px] mt-[100px] mb-16 bg-white rounded-xl mx-auto ">
           <Formik
@@ -44,8 +48,10 @@ export default function Payment () {
               }
 
               try {
+                setLoadingOverlayStatus(true)
                 await postOrder(orderData, user.token)
                 toast.success("Your Order was processed succesfully")
+                setLoadingOverlayStatus(false)
 
                 dispatch(cleanOrderProductsIds())
                 dispatch(cleanCartProducts())
@@ -53,6 +59,7 @@ export default function Payment () {
                   router.push(ROUTES.DASHBOARD)
                 }, 3000)
               } catch (error) {
+                setLoadingOverlayStatus(false)
                 throw new Error(error)
               }
             }}

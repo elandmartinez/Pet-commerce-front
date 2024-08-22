@@ -14,8 +14,9 @@ import { udpdateOrderProductIds } from "@/lib/store/slices/orderProductsIdsSlice
 import { updateOrders } from "@/lib/store/slices/ordersSlice";
 import Footer from "../components/Footer/Footer";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 
-function CartProducts ({cartProducts, handleDeleteProduct, totalProductsPrice}) {
+function CartProducts ({setLoadingOverlayStatus, cartProducts, handleDeleteProduct, totalProductsPrice}) {
   const dispatch = useDispatch()
   const router = useRouter()
   return (
@@ -50,6 +51,7 @@ function CartProducts ({cartProducts, handleDeleteProduct, totalProductsPrice}) 
           }}
           onClick={() => {
             const orderProductIds = cartProducts.map(product => product.productId)
+            setLoadingOverlayStatus(true)
             dispatch(udpdateOrderProductIds(orderProductIds))
             router.push(ROUTES.PAYMENTS)
           }}
@@ -72,6 +74,7 @@ function NoCartProducts () {
 }
 
 export default function ShoppingCart () {
+  const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const cartProducts = useSelector(state => state.cartProducts)
   const dispatch = useDispatch()
   const [cartProductsState, setCartProductsState] = useState(cartProducts)
@@ -96,12 +99,13 @@ export default function ShoppingCart () {
   const isCartEmpty = cartProductsState.length === 0
   return (
     <AuthPageManager>
-      <AuthPageNavbar />
+      <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus} />
+      <LoadingOverlay active={loadingOverlayStatus} />
       <main className="w-full min-h-[60%]" >
         <div className="w-full min-h-[100%] pt-[100px] mb-16" >
           <h1 className="text-[20px] font-bold text-center" >My Articles</h1>
           <div className="w-[90%] max-w-[700px] mt-6 mb-16 p-6 sm:p-6 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%] lg:w-[80%]" >
-            {!isCartEmpty ? <CartProducts cartProducts={cartProductsState} handleDeleteProduct={handleDeleteProduct} totalProductsPrice={totalProductsPrice} /> : <NoCartProducts />}
+            {!isCartEmpty ? <CartProducts setLoadingOverlayStatus={setLoadingOverlayStatus} cartProducts={cartProductsState} handleDeleteProduct={handleDeleteProduct} totalProductsPrice={totalProductsPrice} /> : <NoCartProducts />}
           </div>
         </div>
       </main>

@@ -12,12 +12,13 @@ const pacifico = Pacifico({
   subsets: ["latin"]
 })
 
-function AuthPageNavbar ({ onSearchUpdate }){
+function AuthPageNavbar ({ onSearchUpdate, setLoadingOverlayStatus }){
+  console.log("navbar", {setLoadingOverlayStatus})
   return (
     <div className="relative p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor w-full xl:px-16">
       <div className={` bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>
         {/* logo container, it has the logo and the title of it */}
-        <Link href={ROUTES.DASHBOARD} className="link relative top-[2px] flex flex-col items-center text-[12px]">
+        <Link href={ROUTES.DASHBOARD} onClick={() => {setLoadingOverlayStatus(true)}} className="link relative top-[2px] flex flex-col items-center text-[12px]">
           <img
             src={pawLogo.src}
             className="w-8 h-8 fill-thirdColor sm:w-12 sm:h-12 lg:w-14 lg:h-14"
@@ -56,7 +57,11 @@ function AuthPageNavbar ({ onSearchUpdate }){
               {PRODUCTS_CATEGORIES_ARRAY.map((productCategory, index) => {
                 return (
                   <li key={index}>
-                    <Link href={`${ROUTES.PRODUCTS_CATEGORY}/${productCategory}`} className='link w-full h-full flex justify-center items-center'>
+                    <Link
+                      href={`${ROUTES.PRODUCTS_CATEGORY}/${productCategory}`}
+                      onClick={() => {setLoadingOverlayStatus(true)}}
+                      className='link w-full h-full flex justify-center items-center'
+                    >
                       <div className="category-link__cont">
                         <p
                           className="category-link inline-block underline decoration-thirdColor underline-offset-[3px] decoration-2 relative rounded-xl transition-all duration-300"
@@ -73,7 +78,7 @@ function AuthPageNavbar ({ onSearchUpdate }){
         </div>
 
         {/* principal user menu that goes into screen from the right */}
-        <NavMenuModal />
+        <NavMenuModal setLoadingOverlayStatus={setLoadingOverlayStatus} />
       </div>
     </div>
   )

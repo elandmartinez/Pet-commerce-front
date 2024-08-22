@@ -2,12 +2,14 @@
 
 import AuthPageNavbar from "@/app/components/AuthPageNavbar/AuthPageNavbar"
 import Footer from "@/app/components/Footer/Footer"
+import LoadingOverlay from "@/app/components/LoadingOverlay/LoadingOverlay"
 import AuthPageManager from "@/app/middlewareComponents/AuthPageManager"
 import { fetchProduct } from "@/lib/services"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
 export default function Page ({params}) {
+  const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const [orderProducts, setOrderProducts] = useState()
   const {token: userToken} = useSelector(state => state.user)
   const orders = useSelector(state => state.orders)
@@ -30,7 +32,8 @@ export default function Page ({params}) {
   }, [])
   return (
     <AuthPageManager>
-      <AuthPageNavbar />
+      <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus}/>
+      <LoadingOverlay active={loadingOverlayStatus} />
       <main className="w-full min-h-[60%] pt-[100px]">
         <h1 className="mt-16 mb-4 text-center text-mainColor text-[25px]">Order No. {localOrderData.orderId}</h1>
         <div className="w-[90%] max-w-[500px] mb-16 p-4 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%]">
