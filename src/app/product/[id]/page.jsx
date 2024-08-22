@@ -130,7 +130,7 @@ export default function Page ({params}) {
   return (
     <AuthPageManager>
       <ToastContainer />
-      <AuthPageNavbar />
+      <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus} />
       <LoadingOverlay active={loadingOverlayStatus}/>
       <main className="w-full pb-10 min-h-[60%]">
         {/* product card container */}
