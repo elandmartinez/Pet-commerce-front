@@ -61,9 +61,10 @@ export default function Dashboard () {
     <AuthPageManager>
       <LoadingOverlay active={loadingOverlayStatus} />
       <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus} onSearchUpdate={onSearchUpdate}/>
-      <main className="w-full flex flex-col items-center px-2 pb-10">
+      <main className="w-full min-h-[60%] flex flex-col items-center px-2 pb-10">
         <div className="text-thirdColor text-[30px] mt-10 mb-10 text-center">
           <DashboardTitle
+            localStoreProducts={products}
             isProductsToDisplayEmpty={isProductsToDisplayEmpty}
             isThereSearchingBarValue={isThereSearchingBarValue}
             searchValue={searchingBarValue}
