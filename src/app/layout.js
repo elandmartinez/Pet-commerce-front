@@ -19,8 +19,6 @@ export const metadata = {
 
 //here is the root component
 export default function RootLayout({ children }) {
-
-  console.log("hey")
   return (
     <html lang="en">
       <body className={`${roboto.className} relative bg-mainBgColor text-mainColor`}>

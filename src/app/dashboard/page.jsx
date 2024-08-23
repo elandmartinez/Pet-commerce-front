@@ -55,8 +55,6 @@ export default function Dashboard () {
     getProductsData(user.token)
   }, [])
 
-  console.log({setLoadingOverlayStatus})
-
   return (
     <AuthPageManager>
       <LoadingOverlay active={loadingOverlayStatus} />

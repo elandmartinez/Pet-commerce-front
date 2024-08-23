@@ -13,7 +13,6 @@ const pacifico = Pacifico({
 })
 
 function AuthPageNavbar ({ onSearchUpdate, setLoadingOverlayStatus }){
-  console.log("navbar", {setLoadingOverlayStatus})
   return (
     <div className="relative p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor w-full xl:px-16">
       <div className={` bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>
@@ -21,7 +20,6 @@ function AuthPageNavbar ({ onSearchUpdate, setLoadingOverlayStatus }){
         <Link
           href={ROUTES.DASHBOARD}
           onClick={() => {
-            console.log("paw logo", {setLoadingOverlayStatus})
             setLoadingOverlayStatus(true)}
           }
           className="link relative top-[2px] flex flex-col items-center text-[12px]"
