@@ -19,6 +19,8 @@ import { ToastContainer, toast } from "react-toastify";
 import Footer from "@/app/components/Footer/Footer";
 import AuthPageManager from "@/app/middlewareComponents/AuthPageManager";
 import LoadingOverlay from "@/app/components/LoadingOverlay/LoadingOverlay";
+import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
+import ErrorPage from "@/app/components/ErrorPage/ErrorPage";
 
 const NoReviewsFoundComponent = function () {
   return (
@@ -63,8 +65,9 @@ export default function Page ({params}) {
   const products = useSelector(state => state.products)
   const localProductData = products.find(product => product.productId === parseInt(params.id))
   const areThereProductReviews = productReviews.length > 0
+  const isRedirecting = useSelector(state => state.isRedirecting)
 
-  //fucntion that handles the set of the state productAmountToBuy, it makes sure that the amount is not higher that the current stock, and not lower than 0
+  //function that handles the set of the state productAmountToBuy, it makes sure that the amount is not higher that the current stock, and not lower than 0
   function handleProductAmountToBuyChange (action) {
     switch(action) {
       case "ADD":
@@ -126,6 +129,16 @@ export default function Page ({params}) {
 
     getProductReviews(productId, userToken)
   }, [dispatch, localProductData?.productId, userToken])
+
+  //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
+  if(isRedirecting) {
+    //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage
+    //so the ErrorPage is shown and then the user gets redirected to the actual page it needs to be
+    setTimeout(() => {
+      dispatch(updateIsRedirecting(false))
+    }, 1)
+    return (<ErrorPage />)
+  }
 
   return (
     <AuthPageManager>

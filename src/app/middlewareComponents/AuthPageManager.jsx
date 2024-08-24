@@ -3,17 +3,23 @@
 import { persistor } from "@/lib/store"
 import { PersistGate } from "redux-persist/integration/react"
 import { AUTH_REQUIRED_PAGES, NO_AUTH_REQUIRED_PAGES, ROUTES } from "@/utils/constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import ErrorPage from "../components/ErrorPage/ErrorPage";
-import { IsClientCtxProvider, useIsClient } from "@/lib/provider/IsClientSideCtxProvider";
+import { useIsClient } from "@/lib/provider/IsClientSideCtxProvider";
+import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
 
 export default function AuthPageManager ({children}) {
   const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
   const router = useRouter()
   const isClient = useIsClient()
 
-  //if(isClient) {  
+  dispatch(updateIsRedirecting(true))
+
+  if(isClient) {  
+
+    dispatch(updateIsRedirecting(false))
+
     //we get the current pathname of the url
     const currentUrlPathname = window.location.pathname;
   
@@ -23,32 +29,29 @@ export default function AuthPageManager ({children}) {
 
     //here we redirect to login if user is trying to access a page that requires to be logged and user is not logged
     if(isLoadingOnAuthRequiredPage && (user?.token === "")) {
+      dispatch(updateIsRedirecting(true))
       router.push(ROUTES.LOGIN)
     }
 
     //here we redirect to dashboard if user is trying to access a page that requires to not be logged and user is logged
     if(isLoadingOnNoAuthRequiredPage && user?.token) {
+      dispatch(updateIsRedirecting(true))
       router.push(ROUTES.DASHBOARD)
     }
 
     //case for when url is out of existing pages
     if((!isLoadingOnAuthRequiredPage && !isLoadingOnNoAuthRequiredPage) || currentUrlPathname === "" || currentUrlPathname === "/") {
+      dispatch(updateIsRedirecting(true))
       router.push(ROUTES.LOGIN)
     }
-
-    /* if (!router.isFallback) {
-      return <ErrorPage statusCode={404} />
-    } */
-  //}
+  }
 
   return (
     <PersistGate load={0} persistor={persistor}>
-      <IsClientCtxProvider>
-        <div className="w-full h-full">
-          {/* move this navbar back to the layout module */}
-          {children}
-        </div>
-      </IsClientCtxProvider>
+      <div className="w-full h-full">
+        {/* move this navbar back to the layout module */}
+        {children}
+      </div>
     </PersistGate>
   )
 }

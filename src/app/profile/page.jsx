@@ -1,15 +1,30 @@
 'use client'
 import PersonIcon from '@mui/icons-material/Person';
 import AuthPageNavbar from '../components/AuthPageNavbar/AuthPageNavbar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../components/Footer/Footer';
 import AuthPageManager from '../middlewareComponents/AuthPageManager';
 import LoadingOverlay from '../components/LoadingOverlay/LoadingOverlay';
 import { useState } from 'react';
+import { updateIsRedirecting } from '@/lib/store/slices/isRedirectingSlice';
+import ErrorPage from '../components/ErrorPage/ErrorPage';
 
 export default function Profile () {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  const isRedirecting = useSelector(state => state.isRedirecting)
+
+
+  //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
+  if(isRedirecting) {
+    //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage
+    //so the ErrorPage is shown and then the user gets redirected to the actual page it needs to be
+    setTimeout(() => {
+      dispatch(updateIsRedirecting(false))
+    }, 1)
+    return (<ErrorPage />)
+  }
 
   return (
     <AuthPageManager>

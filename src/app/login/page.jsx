@@ -5,7 +5,7 @@ import { LOGIN_SCHEMA } from "@/utils/schemas";
 import { LOGIN_FORM_INITAL_VALUES, ROUTES } from "../../utils/constants";
 import Link from "next/link"
 import TextField from '@mui/material/TextField';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../lib/store/slices/userSlice";
 import { useRouter } from "next/navigation";
 import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
@@ -14,11 +14,14 @@ import { ToastContainer, toast } from "react-toastify";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 import { useState } from "react";
+import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 function Login () {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const router = useRouter()
   const dispatch = useDispatch()
+  const isRedirecting = useSelector(state => state.isRedirecting)
 
   const logUser = async (credentials) => {
     try {
@@ -30,6 +33,16 @@ function Login () {
       toast.error("Couldn't find a user with those credentials :(")
       throw new Error("Returned error when trying to authenticate user")
     }
+  }
+
+  //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
+  if(isRedirecting) {
+    //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage
+    //so the ErrorPage is shown and then the user gets redirected to the actual page it needs to be
+    setTimeout(() => {
+      dispatch(updateIsRedirecting(false))
+    }, 1)
+    return (<ErrorPage />)
   }
 
   return (

@@ -9,8 +9,9 @@ import { updateProducts } from "@/lib/store/slices/productsSlice";
 import { fetchProducts } from "@/lib/services";
 import Footer from "../components/Footer/Footer";
 import DashboardTitle from "../components/DashboardTitle/DashboardTitle";
-import AuthPageManager from "../middlewareComponents/AuthPageManager";
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
+import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 const roboto = Roboto({
   weight: ["100", "300", "500"],
@@ -23,22 +24,9 @@ export default function Dashboard () {
   const [searchingBarValue, setSearchingBarValue] = useState("")
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const dispatch = useDispatch()
-  const products = useSelector(state => state.products)
   const user = useSelector((state) => state.user)
-
-  const filteredBySearchProducts = products.filter(product => {
-    return product.name.includes(searchingBarValue)
-  })
-  const isThereSearchingBarValue = searchingBarValue !== ""
-  const productsToDisplay = isThereSearchingBarValue ? filteredBySearchProducts : products 
-  const isProductsToDisplayEmpty = productsToDisplay.length === 0
-
-  function onSearchUpdate (newSearchValue) {
-    setSearchingBarValue(newSearchValue)
-
-    //setting LoadingOverlayStatus to false because this function activates when 
-    setLoadingOverlayStatus(false)
-  }
+  const products = useSelector(state => state.products)
+  const isRedirecting = useSelector(state => state.isRedirecting)
 
   useEffect(() => {
     async function getProductsData (token) {
@@ -53,10 +41,35 @@ export default function Dashboard () {
     }
 
     getProductsData(user.token)
-  }, [])
+  }, [dispatch, user.token])
+
+  const filteredBySearchProducts = products.filter(product => {
+    return product.name.includes(searchingBarValue)
+  })
+  
+  //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
+  if(isRedirecting) {
+    //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage
+    //so the ErrorPage is shown and then the user gets redirected to the actual page it needs to be
+    setTimeout(() => {
+      dispatch(updateIsRedirecting(false))
+    }, 1)
+    return (<ErrorPage />)
+  }
+
+  const isThereSearchingBarValue = searchingBarValue !== ""
+  const productsToDisplay = isThereSearchingBarValue ? filteredBySearchProducts : products 
+  const isProductsToDisplayEmpty = productsToDisplay.length === 0
+
+  function onSearchUpdate (newSearchValue) {
+    setSearchingBarValue(newSearchValue)
+
+    //setting LoadingOverlayStatus to false because this function activates when 
+    setLoadingOverlayStatus(false)
+  }
 
   return (
-    <AuthPageManager>
+    <>
       <LoadingOverlay active={loadingOverlayStatus} />
       <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus} onSearchUpdate={onSearchUpdate}/>
       <main className="w-full min-h-[60%] flex flex-col items-center px-2 pb-10">
@@ -85,6 +98,6 @@ export default function Dashboard () {
         </div>
       </main>
       <Footer />
-    </AuthPageManager>
+    </>
   )
 }

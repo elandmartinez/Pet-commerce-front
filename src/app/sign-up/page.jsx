@@ -7,7 +7,7 @@ import Link from "next/link"
 import TextField from '@mui/material/TextField';
 import NonAuthPageNavbar from "../components/NonAuthPageNavbar/NonAuthPageNavbar";
 import { authUser } from "@/lib/services";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "@/lib/store/slices/userSlice";
 import { useRouter } from "next/navigation";
 import { postClient } from "@/lib/services";
@@ -15,12 +15,15 @@ import { ToastContainer, toast } from "react-toastify";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 import { useState } from "react";
+import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 
 function SignUp () {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const dispatch = useDispatch()
   const router = useRouter()
+  const isRedirecting = useSelector(state => state.isRedirecting)
   //creating a user is successful, now dispatch the data to the store and make a push in github
 
   async function createClient (bodyRequest) {
@@ -32,6 +35,16 @@ function SignUp () {
       toast.error("Something went wrong with us :(, please try again later")
       return new Error(error)      
     }
+  }
+
+  //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
+  if(isRedirecting) {
+    //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage
+    //so the ErrorPage is shown and then the user gets redirected to the actual page it needs to be
+    setTimeout(() => {
+      dispatch(updateIsRedirecting(false))
+    }, 1)
+    return (<ErrorPage />)
   }
 
   return (

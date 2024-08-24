@@ -1,3 +1,5 @@
+"use client"
+
 const { createContext, useEffect, useContext, useState } = require("react");
 
 //what we do in this module is create a context that is accesible from any point of our application that will tell us

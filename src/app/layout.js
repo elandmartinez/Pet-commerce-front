@@ -2,6 +2,8 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/lib/provider/index";
 import 'react-toastify/dist/ReactToastify.css';
+import { IsClientCtxProvider } from "@/lib/provider/IsClientSideCtxProvider";
+import AuthPageManager from "./middlewareComponents/AuthPageManager";
 
 //here we obtain the roboto font and specify the weight, styles,
 //and subsets that we want to get it with
@@ -23,7 +25,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${roboto.className} relative bg-mainBgColor text-mainColor`}>
         <ReduxProvider>
-          {children}
+          <IsClientCtxProvider>
+            <AuthPageManager>
+              {children}
+            </AuthPageManager>
+          </IsClientCtxProvider>
         </ReduxProvider>
       </body>
     </html>

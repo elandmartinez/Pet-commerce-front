@@ -15,10 +15,24 @@ import { updateOrders } from "@/lib/store/slices/ordersSlice";
 import Footer from "../components/Footer/Footer";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
+import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 function CartProducts ({setLoadingOverlayStatus, cartProducts, handleDeleteProduct, totalProductsPrice}) {
   const dispatch = useDispatch()
   const router = useRouter()
+  const isRedirecting = useSelector(state => state.isRedirecting)
+
+  //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
+  if(isRedirecting) {
+    //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage
+    //so the ErrorPage is shown and then the user gets redirected to the actual page it needs to be
+    setTimeout(() => {
+      dispatch(updateIsRedirecting(false))
+    }, 1)
+    return (<ErrorPage />)
+  }
+
   return (
     <>
       {cartProducts?.map((product, index) => (

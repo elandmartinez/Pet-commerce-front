@@ -19,6 +19,7 @@ import orderProductsIdsSlice from './slices/orderProductsIdsSlice';
 import productReviewsSlice from './slices/productReviewsSlice';
 import addressesSlice from './slices/addressesSlice';
 import ordersSlice from './slices/ordersSlice';
+import isRedirectingSlice from './slices/isRedirectingSlice';
 
 const rootReducer = combineReducers({
   user: userSlice,
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   orderProductsIds: orderProductsIdsSlice,
   reviews: productReviewsSlice,
   addresses: addressesSlice,
-  orders: ordersSlice
+  orders: ordersSlice,
+  isRedirecting: isRedirectingSlice
 })
 
 const persistConfig = {

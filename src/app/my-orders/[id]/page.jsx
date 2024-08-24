@@ -1,18 +1,22 @@
 "use client"
 
 import AuthPageNavbar from "@/app/components/AuthPageNavbar/AuthPageNavbar"
+import ErrorPage from "@/app/components/ErrorPage/ErrorPage"
 import Footer from "@/app/components/Footer/Footer"
 import LoadingOverlay from "@/app/components/LoadingOverlay/LoadingOverlay"
 import AuthPageManager from "@/app/middlewareComponents/AuthPageManager"
 import { fetchProduct } from "@/lib/services"
+import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function Page ({params}) {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const [orderProducts, setOrderProducts] = useState()
   const {token: userToken} = useSelector(state => state.user)
   const orders = useSelector(state => state.orders)
+  const dispatch = useDispatch()
+  const isRedirecting = useSelector(state => state.isRedirecting)
 
   const localOrderData = orders.find(order => order.orderId === parseInt(params.id)) || {}
 
@@ -29,7 +33,18 @@ export default function Page ({params}) {
     }
 
     getOrderProducts()
-  }, [])
+  }, [localOrderData.productsIds, userToken])
+
+  //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
+  if(isRedirecting) {
+    //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage
+    //so the ErrorPage is shown and then the user gets redirected to the actual page it needs to be
+    setTimeout(() => {
+      dispatch(updateIsRedirecting(false))
+    }, 1)
+    return (<ErrorPage />)
+  }
+
   return (
     <AuthPageManager>
       <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus}/>
