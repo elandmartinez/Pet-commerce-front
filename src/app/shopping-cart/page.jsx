@@ -10,8 +10,7 @@ import { useState } from "react";
 import { updateCartProducts } from "@/lib/store/slices/cartProductsSlice";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/utils/constants";
-import { udpdateOrderProductIds } from "@/lib/store/slices/orderProductsIdsSlice";
-import { updateOrders } from "@/lib/store/slices/ordersSlice";
+import { udpdateOrderProducts } from "@/lib/store/slices/orderProductsSlice";
 import Footer from "../components/Footer/Footer";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
@@ -64,9 +63,16 @@ function CartProducts ({setLoadingOverlayStatus, cartProducts, handleDeleteProdu
               }
           }}
           onClick={() => {
-            const orderProductIds = cartProducts.map(product => product.productId)
+            const orderProducts = cartProducts.map(product => {
+              return {
+                productId: product.productId,
+                amount: product.amountInTheCart
+              }
+            })
+
+            console.log("inner", {orderProducts})
             setLoadingOverlayStatus(true)
-            dispatch(udpdateOrderProductIds(orderProductIds))
+            dispatch(udpdateOrderProducts(orderProducts))
             router.push(ROUTES.PAYMENTS)
           }}
         >
@@ -109,6 +115,8 @@ export default function ShoppingCart () {
     setCartProductsState(updatedCartProducts)
     dispatch(updateCartProducts(updatedCartProducts))
   }
+
+  console.log({cartProducts})
 
   const isCartEmpty = cartProductsState.length === 0
   return (

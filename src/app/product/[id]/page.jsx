@@ -55,6 +55,9 @@ const ReviewsComponent = function ({ reviews }) {
   )
 }
 
+
+//change product stock (UPDATE) in db when an order is completed
+
 export default function Page ({params}) {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const [productReviews, setRpoductReviews] = useState([]);
@@ -66,6 +69,8 @@ export default function Page ({params}) {
   const localProductData = products.find(product => product.productId === parseInt(params.id))
   const areThereProductReviews = productReviews.length > 0
   const isRedirecting = useSelector(state => state.isRedirecting)
+
+  console.log({products, localProductData})
 
   //function that handles the set of the state productAmountToBuy, it makes sure that the amount is not higher that the current stock, and not lower than 0
   function handleProductAmountToBuyChange (action) {

@@ -17,6 +17,10 @@ const roboto = Roboto({
   subsets: ["latin"]
 })
 
+///fix: onSearchUpdateFunction does not exists on this page, have to decide whether to invoke that function here
+//(with all than that involves) or to remove this page from the flow of the application and handle products by category on
+//the dashboard too instead of being a diferent page
+
 export default function Page({params}) {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const products = useSelector(state => state.products)

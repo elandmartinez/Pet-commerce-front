@@ -9,7 +9,7 @@ import { Button, ClickAwayListener } from '@mui/material';
 import { ROUTES } from '@/utils/constants';
 import { useDispatch } from 'react-redux';
 import { cleanCartProducts } from '@/lib/store/slices/cartProductsSlice';
-import { cleanOrderProductsIds } from '@/lib/store/slices/orderProductsIdsSlice';
+import { cleanOrderProducts } from '@/lib/store/slices/orderProductsSlice';
 import { cleanUser } from '@/lib/store/slices/userSlice';
 import { cleanOrders } from '@/lib/store/slices/ordersSlice';
 
@@ -26,8 +26,9 @@ export default function NavMenuModal({setLoadingOverlayStatus}) {
   };
 
   function handleLogOut () {
+    console.log("loggin out")
     dispatch(cleanCartProducts())
-    dispatch(cleanOrderProductsIds())
+    dispatch(cleanOrderProducts())
     dispatch(cleanUser())
     dispatch(cleanOrders())
   }

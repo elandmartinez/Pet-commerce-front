@@ -71,7 +71,7 @@ function Login () {
                 const depuratedUserData = {
                   token: data.token,
                   role: data.userData.role,
-                  ...data.userData.client
+                  ...data.userData
                 }
 
                 //node.js server app depuratedData

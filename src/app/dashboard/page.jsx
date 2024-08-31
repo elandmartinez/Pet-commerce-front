@@ -33,15 +33,19 @@ export default function Dashboard () {
       try {
         const products = await fetchProducts(token);
         
+        console.log({fetchedProducts: products})
+
         dispatch(updateProducts(products))
         return 
       } catch (error) {
-        
+        throw new Error("couldn't update products")
       }
     }
 
     getProductsData(user.token)
   }, [dispatch, user.token])
+
+  console.log({products})
 
   const filteredBySearchProducts = products.filter(product => {
     return product.name.includes(searchingBarValue)

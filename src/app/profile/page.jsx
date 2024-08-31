@@ -9,9 +9,12 @@ import { useState } from 'react';
 import { updateIsRedirecting } from '@/lib/store/slices/isRedirectingSlice';
 import ErrorPage from '../components/ErrorPage/ErrorPage';
 
+
+//style client data so it can be updated (edit icon on the right) and is shown as an input
+
 export default function Profile () {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
-  const user = useSelector(state => state.user)
+  const {client } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const isRedirecting = useSelector(state => state.isRedirecting)
 
@@ -26,6 +29,7 @@ export default function Profile () {
     return (<ErrorPage />)
   }
 
+  console.log({client})
   return (
     <AuthPageManager>
       <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus} />  
@@ -48,15 +52,15 @@ export default function Profile () {
           <div className="w-full flex flex-col justify-center items-center">
             <div className='w-full mt-8 text-start'>
               <h3 className='text-[20px] text-mainColor mb-1'>Name</h3>
-              <p>{user.name}</p>     
+              <p>{client.name}</p>     
             </div>
             <div className='w-full mt-8 text-start'>
               <h3 className='text-[20px] text-mainColor mb-1'>Email</h3>
-              <p>{user.email}</p>     
+              <p>{client.email}</p>     
             </div>
             <div className='w-full mt-8 text-start'>
               <h3 className='text-[20px] text-mainColor mb-1'>Phone Number</h3>
-              <p>+{user.nationalCode} {user.phoneNumber}</p>
+              <p>+{client.nationalCode} {client.phoneNumber}</p>
             </div>
           </div>
         </div>

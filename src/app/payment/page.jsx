@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postOrder } from "@/lib/services";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { cleanOrderProductsIds } from "@/lib/store/slices/orderProductsIdsSlice";
+import { cleanOrderProducts } from "@/lib/store/slices/orderProductsSlice";
 import { cleanCartProducts } from "@/lib/store/slices/cartProductsSlice";
 import Footer from "../components/Footer/Footer";
 import AuthPageManager from "../middlewareComponents/AuthPageManager";
@@ -21,7 +21,7 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 export default function Payment () {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const router = useRouter()
-  const orderProductsIds = useSelector(state => state.orderProductsIds)
+  const orderProducts = useSelector(state => state.orderProducts)
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const isRedirecting = useSelector(state => state.isRedirecting)
@@ -35,6 +35,8 @@ export default function Payment () {
     }, 1)
     return (<ErrorPage />)
   }
+
+  console.log({orderProducts})
 
   return (
     <AuthPageManager>
@@ -57,16 +59,18 @@ export default function Payment () {
                 cardOwnerName: values.paymentCardOwnerName,
                 cardLastFourNumbers,
                 clientId: user.email,
-                productsIds: orderProductsIds
+                orderProducts: orderProducts
               }
+              orderData.orderProducts = JSON.stringify(orderData.orderProducts)
 
               try {
+                debugger
                 setLoadingOverlayStatus(true)
                 await postOrder(orderData, user.token)
                 toast.success("Your Order was processed succesfully")
                 setLoadingOverlayStatus(false)
 
-                dispatch(cleanOrderProductsIds())
+                dispatch(cleanOrderProducts())
                 dispatch(cleanCartProducts())
                 setTimeout(() => {
                   router.push(ROUTES.DASHBOARD)
