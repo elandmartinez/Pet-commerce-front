@@ -63,8 +63,7 @@ export default function Payment () {
               }
               orderData.orderProducts = JSON.stringify(orderData.orderProducts)
 
-              try {
-                debugger
+              try { 
                 setLoadingOverlayStatus(true)
                 await postOrder(orderData, user.token)
                 toast.success("Your Order was processed succesfully")

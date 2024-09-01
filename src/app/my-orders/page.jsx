@@ -57,7 +57,8 @@ export default function MyOrders () {
   const isRedirecting = useSelector(state => state.isRedirecting)
 
   useEffect(() => {
-    const customerId = userData.id;
+    console.log({userData})
+    const customerId = userData.email;
     async function getOrdersByClientId(clientId, token) {
 
       //java server app way to get new orders
@@ -73,7 +74,7 @@ export default function MyOrders () {
     }
 
     getOrdersByClientId(customerId, userData.token)
-  }, [dispatch, orders, userData.id, userData.token])
+  }, [dispatch, userData.id, userData.token])
 
   const areThereOrders = orders.length > 0 || orderData.length > 0
 
