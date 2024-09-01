@@ -83,7 +83,13 @@ export const FETCH_METHODS = {
 
 export const initialLoadingOverlayValue = {active: false}
 
-export const BASE_ENDPOINT = "http://localhost:8080/api"
+
+//development base endpoint
+/* export const BASE_ENDPOINT = "http://localhost:8080/api" */
+
+//production base endpoint
+
+export const BASE_ENDPOINT = "https://pet-commerce-back.fly.dev/api"
 
 export const AUTH_REQUIRED_PAGES = ["/dashboard", "/profile", "/my-orders", "/shopping-cart", "/product"]
 export const NO_AUTH_REQUIRED_PAGES = ["/login", "sign-up"]
