@@ -10,7 +10,7 @@ import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice";
 //make a toast appear every time a product is added to the cart
 
 export default function ArticleCard ({data, setLoadingOverlayStatus}) {
-  const currentPath = window.location.pathname.split("/")[1]
+  const currentPath = window.location.pathname
   const dispatch = useDispatch()
   const router = useRouter()
 
