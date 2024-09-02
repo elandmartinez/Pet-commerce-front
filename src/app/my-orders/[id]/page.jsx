@@ -19,8 +19,6 @@ export default function Page ({params}) {
   const isRedirecting = useSelector(state => state.isRedirecting)
 
   const localOrderData = orders.find(order => order.orderId === parseInt(params.id)) || {}
-  console.log({localOrderData})
-
 
   //fetching products seems to work unconsistently, worked for first order, didnt work for last one
   useEffect(() => {
@@ -38,13 +36,10 @@ export default function Page ({params}) {
       });
 
       setOrderProducts(productsFetched)
-      console.log({localOrderProducts, productsFetched})
     }
 
     getOrderProducts()
   }, [localOrderData.productsIds, userToken])
-
-  console.log({orderProducts})
 
   //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
   if(isRedirecting) {

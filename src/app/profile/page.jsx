@@ -14,10 +14,13 @@ import ErrorPage from '../components/ErrorPage/ErrorPage';
 
 export default function Profile () {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
-  const {client } = useSelector(state => state.user)
+  const {client} = useSelector(state => state.user)
+  const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const isRedirecting = useSelector(state => state.isRedirecting)
+  console.log({client, user})
 
+  const clientDataToDisplay = {}
 
   //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
   if(isRedirecting) {
@@ -29,7 +32,6 @@ export default function Profile () {
     return (<ErrorPage />)
   }
 
-  console.log({client})
   return (
     <AuthPageManager>
       <AuthPageNavbar setLoadingOverlayStatus={setLoadingOverlayStatus} />  

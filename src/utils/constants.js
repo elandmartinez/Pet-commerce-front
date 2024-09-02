@@ -42,7 +42,7 @@ export const PRODUCTS_CATEGORIES_ARRAY = ["Food", "Hygiene", "Furniture", "Acces
 export const ROUTES = {
   LOGIN: "/login",
   SIGN_UP: "/sign-up",
-  DASHBOARD: "/dashboard",
+  PRODUCTS: "/products",
   PROFILE: "/profile",
   SHOPPING_CART: "/shopping-cart",
   MY_ORDERS: "/my-orders",
@@ -91,5 +91,5 @@ export const initialLoadingOverlayValue = {active: false}
 
 export const BASE_ENDPOINT = "https://pet-commerce-back.fly.dev/api"
 
-export const AUTH_REQUIRED_PAGES = ["/dashboard", "/profile", "/my-orders", "/shopping-cart", "/product"]
+export const AUTH_REQUIRED_PAGES = ["/products", "/profile", "/my-orders", "/shopping-cart", "/product"]
 export const NO_AUTH_REQUIRED_PAGES = ["/login", "sign-up"]

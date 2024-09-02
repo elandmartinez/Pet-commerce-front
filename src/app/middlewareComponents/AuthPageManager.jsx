@@ -33,10 +33,10 @@ export default function AuthPageManager ({children}) {
       router.push(ROUTES.LOGIN)
     }
 
-    //here we redirect to dashboard if user is trying to access a page that requires to not be logged and user is logged
+    //here we redirect to products if user is trying to access a page that requires to not be logged and user is logged
     if(isLoadingOnNoAuthRequiredPage && user?.token) {
       dispatch(updateIsRedirecting(true))
-      router.push(ROUTES.DASHBOARD)
+      router.push(ROUTES.PRODUCTS)
     }
 
     //case for when url is out of existing pages

@@ -131,7 +131,6 @@ export async function fetchOrdersByClientId (customerId, token) {
 }
 
 export async function postOrder(orderData, token) {
-  console.log({orderData})
   try {
     const res = await fetch(`${BASE_ENDPOINT}/orders/post-order`, {
       method: FETCH_METHODS.POST,

@@ -57,7 +57,6 @@ export default function MyOrders () {
   const isRedirecting = useSelector(state => state.isRedirecting)
 
   useEffect(() => {
-    console.log({userData})
     const customerId = userData.email;
     async function getOrdersByClientId(clientId, token) {
 

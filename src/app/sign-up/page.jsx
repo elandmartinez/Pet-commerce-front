@@ -73,7 +73,7 @@ function SignUp () {
 
                 dispatch(updateUser({...values, ...userToken}))
 
-                router.push(ROUTES.DASHBOARD)
+                router.push(ROUTES.PRODUCTS)
 
                 setSubmitting(false)        
               } catch (error) {

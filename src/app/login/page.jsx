@@ -78,7 +78,7 @@ function Login () {
                 /* const depuratedUserData = {...data.body} */
 
                 dispatch(updateUser(depuratedUserData))
-                router.push(ROUTES.DASHBOARD)
+                router.push(ROUTES.PRODUCTS)
               } catch (error) {
                 setLoadingOverlayStatus(false)
                 throw new Error(error)

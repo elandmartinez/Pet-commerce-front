@@ -18,7 +18,7 @@ function AuthPageNavbar ({ onSearchUpdate, setLoadingOverlayStatus }){
       <div className={` bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>
         {/* logo container, it has the logo and the title of it */}
         <Link
-          href={ROUTES.DASHBOARD}
+          href={ROUTES.PRODUCTS}
           onClick={() => {
             setLoadingOverlayStatus(true)}
           }

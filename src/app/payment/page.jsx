@@ -36,8 +36,6 @@ export default function Payment () {
     return (<ErrorPage />)
   }
 
-  console.log({orderProducts})
-
   return (
     <AuthPageManager>
       <ToastContainer />
@@ -72,7 +70,7 @@ export default function Payment () {
                 dispatch(cleanOrderProducts())
                 dispatch(cleanCartProducts())
                 setTimeout(() => {
-                  router.push(ROUTES.DASHBOARD)
+                  router.push(ROUTES.PRODUCTS)
                 }, 3000)
               } catch (error) {
                 setLoadingOverlayStatus(false)

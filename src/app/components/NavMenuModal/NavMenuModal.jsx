@@ -26,7 +26,6 @@ export default function NavMenuModal({setLoadingOverlayStatus}) {
   };
 
   function handleLogOut () {
-    console.log("loggin out")
     dispatch(cleanCartProducts())
     dispatch(cleanOrderProducts())
     dispatch(cleanUser())

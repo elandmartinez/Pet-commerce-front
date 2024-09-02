@@ -70,7 +70,6 @@ function CartProducts ({setLoadingOverlayStatus, cartProducts, handleDeleteProdu
               }
             })
 
-            console.log("inner", {orderProducts})
             setLoadingOverlayStatus(true)
             dispatch(udpdateOrderProducts(orderProducts))
             router.push(ROUTES.PAYMENTS)
@@ -115,8 +114,6 @@ export default function ShoppingCart () {
     setCartProductsState(updatedCartProducts)
     dispatch(updateCartProducts(updatedCartProducts))
   }
-
-  console.log({cartProducts})
 
   const isCartEmpty = cartProductsState.length === 0
   return (
