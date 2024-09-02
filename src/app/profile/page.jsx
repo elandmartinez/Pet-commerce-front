@@ -20,8 +20,6 @@ export default function Profile () {
   const isRedirecting = useSelector(state => state.isRedirecting)
   console.log({client, user})
 
-  const clientDataToDisplay = {}
-
   //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
   if(isRedirecting) {
     //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage

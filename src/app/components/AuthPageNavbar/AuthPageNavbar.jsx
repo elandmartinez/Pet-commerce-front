@@ -6,6 +6,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import NavMenuModal from "../NavMenuModal/NavMenuModal";
 import Link from "next/link";
 import { PRODUCTS_CATEGORIES_ARRAY, ROUTES } from "@/utils/constants";
+import { useDispatch } from "react-redux";
+import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice";
 
 const pacifico = Pacifico({
   weight: ["400"],
@@ -13,6 +15,9 @@ const pacifico = Pacifico({
 })
 
 function AuthPageNavbar ({ onSearchUpdate, setLoadingOverlayStatus }){
+  const dispatch = useDispatch()
+  const currentPath = window.location.pathname
+
   return (
     <div className="relative p-4 sm:pb-1 flex flex-col items-center text-thirdColor top-0 bg-secondaryBgColor w-full xl:px-16">
       <div className={` bg-secondaryBgColor flex justify-between items-center sm:items-start w-full`}>
@@ -20,6 +25,7 @@ function AuthPageNavbar ({ onSearchUpdate, setLoadingOverlayStatus }){
         <Link
           href={ROUTES.PRODUCTS}
           onClick={() => {
+            dispatch(updateLastPageVisited(currentPath))
             setLoadingOverlayStatus(true)}
           }
           className="link relative top-[2px] flex flex-col items-center text-[12px]"
@@ -64,7 +70,10 @@ function AuthPageNavbar ({ onSearchUpdate, setLoadingOverlayStatus }){
                   <li key={index}>
                     <Link
                       href={`${ROUTES.PRODUCTS_CATEGORY}/${productCategory}`}
-                      onClick={() => {setLoadingOverlayStatus(true)}}
+                      onClick={() => {
+                        setLoadingOverlayStatus(true)
+                        dispatch(updateLastPageVisited(currentPath))
+                      }}
                       className='link w-full h-full flex justify-center items-center'
                     >
                       <div className="category-link__cont">
@@ -83,7 +92,7 @@ function AuthPageNavbar ({ onSearchUpdate, setLoadingOverlayStatus }){
         </div>
 
         {/* principal user menu that goes into screen from the right */}
-        <NavMenuModal setLoadingOverlayStatus={setLoadingOverlayStatus} />
+        <NavMenuModal setLoadingOverlayStatus={setLoadingOverlayStatus} currentPath={currentPath}/>
       </div>
     </div>
   )

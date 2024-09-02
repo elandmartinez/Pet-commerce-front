@@ -16,6 +16,7 @@ import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 import { useState } from "react";
 import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
+import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice";
 
 function Login () {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
@@ -78,6 +79,7 @@ function Login () {
                 /* const depuratedUserData = {...data.body} */
 
                 dispatch(updateUser(depuratedUserData))
+                dispatch(updateLastPageVisited(ROUTES.LOGIN))
                 router.push(ROUTES.PRODUCTS)
               } catch (error) {
                 setLoadingOverlayStatus(false)
@@ -127,7 +129,7 @@ function Login () {
 
                 {/* text with link that redirects to sign-up page */}
                 <div className="w-full justify-start pl-1 mt-4 mb-1">
-                  <Link href={"/sign-up"} className="link">
+                  <Link href={"/sign-up"} className="link" onClick={() => {dispatch(updateLastPageVisited(ROUTES.LOGIN))}}>
                     <p>
                     ¿No tienes una cuenta?
                       <strong className=" text-secondaryBgColor underline"> Crear cuenta</strong>

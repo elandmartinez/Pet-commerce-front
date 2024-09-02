@@ -12,6 +12,8 @@ import ProductsPageTitle from "../components/ProductsPageTitle/ProductsPageTitle
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
+import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice";
+import { ROUTES } from "@/utils/constants";
 
 const roboto = Roboto({
   weight: ["100", "300", "500"],
@@ -27,6 +29,8 @@ export default function Products () {
   const user = useSelector((state) => state.user)
   const products = useSelector(state => state.products)
   const isRedirecting = useSelector(state => state.isRedirecting)
+
+  dispatch(updateLastPageVisited(ROUTES.PRODUCTS))
 
   useEffect(() => {
     async function getProductsData (token) {

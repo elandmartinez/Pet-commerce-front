@@ -7,6 +7,8 @@ import LoadingOverlay from "@/app/components/LoadingOverlay/LoadingOverlay"
 import AuthPageManager from "@/app/middlewareComponents/AuthPageManager"
 import { fetchProduct } from "@/lib/services"
 import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice"
+import lastPageVisitedSlice from "@/lib/store/slices/lastPageVisitedSlice"
+import { ROUTES } from "@/utils/constants"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -19,6 +21,8 @@ export default function Page ({params}) {
   const isRedirecting = useSelector(state => state.isRedirecting)
 
   const localOrderData = orders.find(order => order.orderId === parseInt(params.id)) || {}
+
+  dispatch(lastPageVisitedSlice(ROUTES.MY_ORDERS))
 
   //fetching products seems to work unconsistently, worked for first order, didnt work for last one
   useEffect(() => {

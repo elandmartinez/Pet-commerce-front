@@ -12,6 +12,7 @@ import AuthPageManager from "../middlewareComponents/AuthPageManager"
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay"
 import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice"
 import ErrorPage from "../components/ErrorPage/ErrorPage"
+import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice"
 
 const NoOrdersFoundComponent = function () {
   return (
@@ -22,12 +23,14 @@ const NoOrdersFoundComponent = function () {
 }
 
 const OrdersComponent = function ({ orders, router }) {
+  const dispatch = useDispatch()
   return (
     <>
     <div className="min-w-[400px] flex flex-col items-center px-2">
       {orders.map((order, index) => (
         <article
           onClick={() => {
+            dispatch(updateLastPageVisited(ROUTES.MY_ORDERS))
             router.push(`${ROUTES.MY_ORDERS}/${order.orderId}`)
           }}
           key={index} className="w-full bg-hoverColor rounded-xl p-2 px-4 my-4 flex justify-between items-center transition hover:scale-[1.02]"

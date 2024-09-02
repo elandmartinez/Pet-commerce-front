@@ -17,6 +17,7 @@ import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 import { useState } from "react";
 import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
+import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice";
 
 export default function Payment () {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
@@ -70,6 +71,7 @@ export default function Payment () {
                 dispatch(cleanOrderProducts())
                 dispatch(cleanCartProducts())
                 setTimeout(() => {
+                  dispatch(updateLastPageVisited(ROUTES.PAYMENTS))
                   router.push(ROUTES.PRODUCTS)
                 }, 3000)
               } catch (error) {

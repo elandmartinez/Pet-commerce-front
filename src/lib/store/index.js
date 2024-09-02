@@ -20,6 +20,7 @@ import productReviewsSlice from './slices/productReviewsSlice';
 import addressesSlice from './slices/addressesSlice';
 import ordersSlice from './slices/ordersSlice';
 import isRedirectingSlice from './slices/isRedirectingSlice';
+import lastPageVisitedSlice from './slices/lastPageVisitedSlice';
 
 const rootReducer = combineReducers({
   user: userSlice,
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
   reviews: productReviewsSlice,
   addresses: addressesSlice,
   orders: ordersSlice,
-  isRedirecting: isRedirectingSlice
+  isRedirecting: isRedirectingSlice,
+  lastPageVisited: lastPageVisitedSlice
 })
 
 const persistConfig = {

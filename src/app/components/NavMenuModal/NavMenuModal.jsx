@@ -12,8 +12,9 @@ import { cleanCartProducts } from '@/lib/store/slices/cartProductsSlice';
 import { cleanOrderProducts } from '@/lib/store/slices/orderProductsSlice';
 import { cleanUser } from '@/lib/store/slices/userSlice';
 import { cleanOrders } from '@/lib/store/slices/ordersSlice';
+import { updateLastPageVisited } from '@/lib/store/slices/lastPageVisitedSlice';
 
-export default function NavMenuModal({setLoadingOverlayStatus}) {
+export default function NavMenuModal({setLoadingOverlayStatus, currentPath}) {
   const dispatch = useDispatch()
   const [showSideBar, setShowSideBar] = React.useState(false);
 
@@ -76,7 +77,10 @@ export default function NavMenuModal({setLoadingOverlayStatus}) {
                 <Link
                   href={ROUTES.PROFILE}
                   className='flex w-full h-full p-4 pl-2 link'
-                  onClick={() => {setLoadingOverlayStatus(true)}}
+                  onClick={() => {
+                    dispatch(updateLastPageVisited(ROUTES))
+                    setLoadingOverlayStatus(true)
+                  }}
                 >
                   <PersonIcon className='ml-1 mr-2' />
                   <p>My profile</p>

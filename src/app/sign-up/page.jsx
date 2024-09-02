@@ -17,6 +17,7 @@ import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 import { useState } from "react";
 import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
+import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice";
 
 
 function SignUp () {
@@ -69,10 +70,9 @@ function SignUp () {
                 //in node.js server app  must use "email"
                 const userCredential = {username: values.email, password: values.password}
                 const userToken = await authUser(userCredential)
-                
 
                 dispatch(updateUser({...values, ...userToken}))
-
+                dispatch(updateLastPageVisited(ROUTES.SIGN_UP))
                 router.push(ROUTES.PRODUCTS)
 
                 setSubmitting(false)        
@@ -165,7 +165,7 @@ function SignUp () {
 
                 {/* LOGIN LINK */}
                 <div className="w-full justify-start pl-1 mt-4 mb-1">
-                  <Link href={"/login"} className="link">
+                  <Link href={"/login"} className="link" onClick={() => {dispatch(updateLastPageVisited(ROUTES.SIGN_UP))}}>
                     <p className="">
                     ¿Ya tienes una cuenta?
                       <strong className=" text-secondaryBgColor underline"> Ingresar con mi cuenta</strong>

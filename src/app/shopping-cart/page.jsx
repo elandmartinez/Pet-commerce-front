@@ -16,6 +16,7 @@ import AuthPageManager from "../middlewareComponents/AuthPageManager";
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
+import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice";
 
 function CartProducts ({setLoadingOverlayStatus, cartProducts, handleDeleteProduct, totalProductsPrice}) {
   const dispatch = useDispatch()
@@ -72,6 +73,7 @@ function CartProducts ({setLoadingOverlayStatus, cartProducts, handleDeleteProdu
 
             setLoadingOverlayStatus(true)
             dispatch(udpdateOrderProducts(orderProducts))
+            dispatch(updateLastPageVisited(ROUTES.SHOPPING_CART))
             router.push(ROUTES.PAYMENTS)
           }}
         >
