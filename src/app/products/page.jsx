@@ -40,7 +40,7 @@ export default function Products () {
       setTimeout(() => {
         dispatch(updateIsRedirecting(false))
       }, 1)
-      return (<ErrorPage />)
+      return
     }
 
     async function getProductsData (token) {
