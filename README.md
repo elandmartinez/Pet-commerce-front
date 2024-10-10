@@ -10,7 +10,12 @@ url in auth route for login:`${BASE_ENDPOINT}/login`
 
 login credentials must be "email" and "password"
 url in auth route for login:`${BASE_ENDPOINT}/auth/login`
+x
 
+## email and password for login in
+
+email: eland@gmail.com
+password: admin123
 
 
 ## Getting Started

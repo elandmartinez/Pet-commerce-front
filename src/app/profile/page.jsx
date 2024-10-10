@@ -52,15 +52,15 @@ export default function Profile () {
           <div className="w-full flex flex-col justify-center items-center">
             <div className='w-full mt-8 text-start'>
               <h3 className='text-[20px] text-mainColor mb-1'>Name</h3>
-              <p>{client.name}</p>     
+              <p>{client?.name}</p>     
             </div>
             <div className='w-full mt-8 text-start'>
               <h3 className='text-[20px] text-mainColor mb-1'>Email</h3>
-              <p>{client.email}</p>     
+              <p>{client?.email}</p>     
             </div>
             <div className='w-full mt-8 text-start'>
               <h3 className='text-[20px] text-mainColor mb-1'>Phone Number</h3>
-              <p>+{client.nationalCode} {client.phoneNumber}</p>
+              <p>+{client?.nationalCode} {client?.phoneNumber}</p>
             </div>
           </div>
         </div>

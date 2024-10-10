@@ -21,7 +21,6 @@ const roboto = Roboto({
   subsets: ["latin"]
 })
 
-
 export default function Products () {
   const [searchingBarValue, setSearchingBarValue] = useState("")
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
@@ -33,6 +32,17 @@ export default function Products () {
   dispatch(updateLastPageVisited(ROUTES.PRODUCTS))
 
   useEffect(() => {
+
+    //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
+    if(isRedirecting) {
+      //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage
+      //so the ErrorPage is shown and then the user gets redirected to the actual page it needs to be
+      setTimeout(() => {
+        dispatch(updateIsRedirecting(false))
+      }, 1)
+      return (<ErrorPage />)
+    }
+
     async function getProductsData (token) {
       try {
         const products = await fetchProducts(token);
@@ -46,21 +56,11 @@ export default function Products () {
     }
 
     getProductsData(user.token)
-  }, [dispatch, user.token])
+  }, [dispatch, user.token, isRedirecting])
 
   const filteredBySearchProducts = products.filter(product => {
     return product.name.includes(searchingBarValue)
   })
-  
-  //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
-  if(isRedirecting) {
-    //this setTimeout is for making the update of the isRedirecting status after the render of the ErrorPage
-    //so the ErrorPage is shown and then the user gets redirected to the actual page it needs to be
-    setTimeout(() => {
-      dispatch(updateIsRedirecting(false))
-    }, 1)
-    return (<ErrorPage />)
-  }
 
   const isThereSearchingBarValue = searchingBarValue !== ""
   const productsToDisplay = isThereSearchingBarValue ? filteredBySearchProducts : products 

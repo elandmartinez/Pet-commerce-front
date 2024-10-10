@@ -27,10 +27,13 @@ export default function NavMenuModal({setLoadingOverlayStatus, currentPath}) {
   };
 
   function handleLogOut () {
-    dispatch(cleanCartProducts())
-    dispatch(cleanOrderProducts())
-    dispatch(cleanUser())
-    dispatch(cleanOrders())
+    
+    setTimeout(() => {
+      dispatch(cleanCartProducts())
+      dispatch(cleanOrderProducts())
+      dispatch(cleanUser())
+      dispatch(cleanOrders())
+    }, 50)
   }
 
   return (
