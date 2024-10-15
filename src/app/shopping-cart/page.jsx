@@ -38,15 +38,15 @@ function CartProducts ({setLoadingOverlayStatus, cartProducts, handleDeleteProdu
         <article key={index} className="relative w-full max-h-[500px] rounded-xl bg-hoverColor my-4 py-4 px-4
         sm:px-10">
 
-          <div className="w-full h-full mx-auto flex flex-col justify-between">
-            <div className="w-full h-full">
+          <div className="h-full mx-auto flex flex-col justify-between">
+            <div className="h-full">
 
-              <div className="w-full bg-hoverColor text-shadowColor flex justify-center items-center rounded-t-lg">
+              <div className="bg-hoverColor text-shadowColor flex justify-center items-center rounded-t-lg">
                 <Image 
                   src={product?.imageUrl}
                   width={150}
                   height={120}
-                  className="w-full h-[300px] rounded-t-lg rounded-b-none object-contain sm:max-w-[150px] sm:max-h-[]"
+                  className="w-full h-[300px] rounded-t-lg rounded-b-none object-contain"
                   alt={product?.name}
                 />
               </div>
@@ -116,11 +116,11 @@ export default function ShoppingCart () {
       <main className="w-full min-h-[60%]" >
         <div className="w-full min-h-[100%] pt-[100px] mb-16" >
           <h1 className="text-[20px] font-bold text-center" >My Articles</h1>
-          <div className="w-[90%] max-w-[550px] mt-6 mb-16 p-6 sm:p-6 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%] lg:w-[80%]
-            md:max-w-[900px]
-            2xl:max-w-[1330px]">
+          <div className="mt-6 mb-16 p-6 sm:p-6 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor
+            
+">
 
-            <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 md:gap-4 2xl:grid-cols-3" >
+            <div className="cart-products__cont h-full grid md:gap-4" >
               {!isCartEmpty ? <CartProducts setLoadingOverlayStatus={setLoadingOverlayStatus} cartProducts={cartProductsState} handleDeleteProduct={handleDeleteProduct} totalProductsPrice={totalProductsPrice} /> : <NoCartProducts />}
             </div>
             <div className="mt-10">

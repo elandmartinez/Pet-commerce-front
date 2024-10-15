@@ -152,10 +152,10 @@ export default function Page ({params}) {
       <LoadingOverlay active={loadingOverlayStatus}/>
       <main className="w-full pb-10 min-h-[60%]">
         {/* product card container */}
-        <div className="w-[95%] max-w-[1000px] mt-16 mb-16 p-2 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor, sm:flex sm:w-[90%] lg:w-[80%]">
-          <div className="flex flex-col sm:pr-4 sm:border-r border-shadowColor sm:w-[45%]">
+        <div className="w-[95%] max-w-[1000px] mt-16 mb-16 p-2 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:flex sm:w-[90%] lg:w-[80%]">
+          <div className="flex flex-col sm:pr-[9px] sm:border-r border-shadowColor sm:w-[45%]">
             {/* product image */}
-            <div className="w-full max-w-[400px] rounded-xl flex justify-center mx-auto mb-6">
+            <div className="min-h-[400px] w-full max-w-[400px] rounded-xl flex justify-center mx-auto mb-6">
               <Image src={localProductData.imageUrl} alt={localProductData.name} width={400} height={400}
                 className="rounded-xl object-contain" priority
               />

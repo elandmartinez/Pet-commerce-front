@@ -156,6 +156,10 @@ body::-webkit-scrollbar {
   margin: 0 10px 0 10px;
 }
 
+.cart-products__cont {
+  grid-template-columns: repeat(auto-fill, minmax(275px, 400px));
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
