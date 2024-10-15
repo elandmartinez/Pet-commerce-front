@@ -21,7 +21,7 @@ import AuthPageManager from "@/app/middlewareComponents/AuthPageManager";
 import LoadingOverlay from "@/app/components/LoadingOverlay/LoadingOverlay";
 import { updateIsRedirecting } from "@/lib/store/slices/isRedirectingSlice";
 import ErrorPage from "@/app/components/ErrorPage/ErrorPage";
-import lastPageVisitedSlice from "@/lib/store/slices/lastPageVisitedSlice";
+import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice";
 
 const NoReviewsFoundComponent = function () {
   return (
@@ -93,7 +93,7 @@ export default function Page ({params}) {
     }
     setLoadingOverlayStatus(true)
     dispatch(addProductToCart({productData: localProductData, amountToAdd: productAmountToBuy}))
-    dispatch(lastPageVisitedSlice(ROUTES.PRODUCT))
+    dispatch(updateLastPageVisited(ROUTES.PRODUCT))
     router.push(`${ROUTES.SHOPPING_CART}`)
 
   }

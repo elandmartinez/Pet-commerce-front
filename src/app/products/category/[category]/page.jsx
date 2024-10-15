@@ -53,8 +53,6 @@ export default function Page({params}) {
     setLoadingOverlayStatus(false)
   }
 
-  console.log({searchingBarValue})
-
   const isThereSearchingBarValue = searchingBarValue !== ""
   const productsToDisplay = isThereSearchingBarValue ? filteredBySearchProducts : categoryProducts
   const isProductsToDisplayEmpty = productsToDisplay.length === 0

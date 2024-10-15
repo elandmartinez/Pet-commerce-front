@@ -9,7 +9,6 @@ export default function LoadingOverlay ({active}) {
   const currentPath = window.location.pathname
   const lastPageVisited = useSelector(state => state.lastPageVisited)
   const isRedirectingToSamePage = lastPageVisited === currentPath
-  console.log({isRedirectingToSamePage, lastPageVisited, currentPath, active})
 
   if(!active || isRedirectingToSamePage) return null
 

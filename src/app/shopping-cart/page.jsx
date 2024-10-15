@@ -20,7 +20,6 @@ import { updateLastPageVisited } from "@/lib/store/slices/lastPageVisitedSlice";
 
 function CartProducts ({setLoadingOverlayStatus, cartProducts, handleDeleteProduct, totalProductsPrice}) {
   const dispatch = useDispatch()
-  const router = useRouter()
   const isRedirecting = useSelector(state => state.isRedirecting)
 
   //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
@@ -36,50 +35,41 @@ function CartProducts ({setLoadingOverlayStatus, cartProducts, handleDeleteProdu
   return (
     <>
       {cartProducts?.map((product, index) => (
-        <article key={index} className= "relative w-full rounded-xl bg-hoverColor my-4 p-3 px-4 flex flex-col sm:flex-row justify-between items-center">
-          <div className="w-full flex items-center justify-between text-end sm:text-start">
-            <Image className="rounded-xl" src={product.imageUrl} alt={product.name} width={100} height={60} />
-            <div className="flex flex-col justify-between ml-4">
-              <p className="sm:mb-3">{product.name}</p>
-              <p className="text-ocre">${product.price}</p>
+        <article key={index} className="relative w-full max-h-[500px] rounded-xl bg-hoverColor my-4 py-4 px-4
+        sm:px-10">
+
+          <div className="w-full h-full mx-auto flex flex-col justify-between">
+            <div className="w-full h-full">
+
+              <div className="w-full bg-hoverColor text-shadowColor flex justify-center items-center rounded-t-lg">
+                <Image 
+                  src={product?.imageUrl}
+                  width={150}
+                  height={120}
+                  className="w-full h-[300px] rounded-t-lg rounded-b-none object-contain sm:max-w-[150px] sm:max-h-[]"
+                  alt={product?.name}
+                />
+              </div>
+
+
+            </div>
+              <div className="h-full flex flex-col justify-between text-[20px] font-bold ml-1">
+                <p className="text-[22px] mt-2">{product.name}</p>
+                <p className="text-ocre">Price: ${product.price}</p>
+              </div>
+
+            <div className="w-full flex justify-between items-center self-end">
+
+              <p className="text-secondaryColor">Amount: {product.amountInTheCart}</p>
+
+              <div onClick={() => {handleDeleteProduct(product.productId)}} className="p-2 transition-all rounded-full hover:bg-warningHoverColor">
+                <DeleteIcon sx={{fill: "var(--red)"}}/>
+              </div>
             </div>
           </div>
-          <div className="w-full flex justify-between items-center p-2 my-2">
-            <p className="text-secondaryColor">Amount: {product.amountInTheCart}</p>
-            <div onClick={() => {handleDeleteProduct(product.productId)}} className="p-2 transition-all rounded-full hover:bg-warningHoverColor">
-              <DeleteIcon sx={{fill: "var(--red)"}}/>
-            </div>
-          </div>
+
         </article>
       ))}
-      <div className="mt-10">
-        <p className="font-bold text-[20px] text-ocre text-center mb-8">Total Price: ${totalProductsPrice}</p>
-        <Button sx={{
-            width: "100%",
-            height: "50px",
-            fontWeight: "700", 
-            backgroundColor: "var(--secondary-bg-color)",
-            ":hover": {
-              backgroundColor: "var(--shadow-color)"
-              }
-          }}
-          onClick={() => {
-            const orderProducts = cartProducts.map(product => {
-              return {
-                productId: product.productId,
-                amount: product.amountInTheCart
-              }
-            })
-
-            setLoadingOverlayStatus(true)
-            dispatch(udpdateOrderProducts(orderProducts))
-            dispatch(updateLastPageVisited(ROUTES.SHOPPING_CART))
-            router.push(ROUTES.PAYMENTS)
-          }}
-        >
-          Buy products
-        </Button>
-      </div>
     </>
     
   )
@@ -95,6 +85,7 @@ function NoCartProducts () {
 }
 
 export default function ShoppingCart () {
+  const router = useRouter()
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const cartProducts = useSelector(state => state.cartProducts)
   const dispatch = useDispatch()
@@ -125,8 +116,41 @@ export default function ShoppingCart () {
       <main className="w-full min-h-[60%]" >
         <div className="w-full min-h-[100%] pt-[100px] mb-16" >
           <h1 className="text-[20px] font-bold text-center" >My Articles</h1>
-          <div className="w-[90%] max-w-[700px] mt-6 mb-16 p-6 sm:p-6 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%] lg:w-[80%]" >
-            {!isCartEmpty ? <CartProducts setLoadingOverlayStatus={setLoadingOverlayStatus} cartProducts={cartProductsState} handleDeleteProduct={handleDeleteProduct} totalProductsPrice={totalProductsPrice} /> : <NoCartProducts />}
+          <div className="w-[90%] max-w-[550px] mt-6 mb-16 p-6 sm:p-6 mx-auto rounded-xl bg-white shadow-xl shadow-hoverColor sm:w-[90%] lg:w-[80%]
+            md:max-w-[900px]
+            2xl:max-w-[1330px]">
+
+            <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 md:gap-4 2xl:grid-cols-3" >
+              {!isCartEmpty ? <CartProducts setLoadingOverlayStatus={setLoadingOverlayStatus} cartProducts={cartProductsState} handleDeleteProduct={handleDeleteProduct} totalProductsPrice={totalProductsPrice} /> : <NoCartProducts />}
+            </div>
+            <div className="mt-10">
+              <p className="font-bold text-[20px] text-ocre text-center mb-8">Total Price: ${totalProductsPrice}</p>
+              <Button sx={{
+                  width: "100%",
+                  height: "50px",
+                  fontWeight: "700", 
+                  backgroundColor: "var(--secondary-bg-color)",
+                  ":hover": {
+                    backgroundColor: "var(--shadow-color)"
+                    }
+                }}
+                onClick={() => {
+                  const orderProducts = cartProducts.map(product => {
+                    return {
+                      productId: product.productId,
+                      amount: product.amountInTheCart
+                    }
+                  })
+
+                  setLoadingOverlayStatus(true)
+                  dispatch(udpdateOrderProducts(orderProducts))
+                  dispatch(updateLastPageVisited(ROUTES.SHOPPING_CART))
+                  router.push(ROUTES.PAYMENTS)
+                }}
+              >
+                Buy products
+              </Button>
+            </div>
           </div>
         </div>
       </main>

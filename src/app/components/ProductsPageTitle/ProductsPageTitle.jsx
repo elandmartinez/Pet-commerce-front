@@ -42,8 +42,6 @@ function NoProductsInStorage () {
 }
 
 export default function ProductsPageTitle ({ localStorageProducts, isProductsToDisplayEmpty, isThereSearchingBarValue, searchValue, isProductsByCategory = false, category = "" }) {
-
-  console.log({isProductsByCategory})
   return (
     <div className="max-w-[600px]">
       {isProductsToDisplayEmpty ?

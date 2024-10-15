@@ -27,16 +27,11 @@ export default function AuthPageManager ({children}) {
     const isLoadingOnAuthRequiredPage = AUTH_REQUIRED_PAGES.some(pagePath => currentUrlPathname.includes(pagePath))
     const isLoadingOnNoAuthRequiredPage = NO_AUTH_REQUIRED_PAGES.some(pagePath => currentUrlPathname.includes(pagePath))
 
-    //console.log("authing", {isLoadingOnAuthRequiredPage, user})
-
     //here we redirect to login if user is trying to access a page that requires to be logged and user is not logged
     if(isLoadingOnAuthRequiredPage && !user.token) {
-      //console.log("no token")
       dispatch(updateIsRedirecting(true))
       router.push(ROUTES.LOGIN)
     }
-
-    //console.log("passed no token condition")
 
     //here we redirect to products if user is trying to access a page that requires to not be logged and user is logged
     if(isLoadingOnNoAuthRequiredPage && user?.token) {

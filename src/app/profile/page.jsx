@@ -15,10 +15,8 @@ import ErrorPage from '../components/ErrorPage/ErrorPage';
 export default function Profile () {
   const [loadingOverlayStatus, setLoadingOverlayStatus] = useState(false)
   const {client} = useSelector(state => state.user)
-  const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const isRedirecting = useSelector(state => state.isRedirecting)
-  console.log({client, user})
 
   //if the state of redirecting is true, we dont want this page to actually render, so we interrumpt it
   if(isRedirecting) {

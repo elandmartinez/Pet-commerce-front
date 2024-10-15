@@ -47,7 +47,6 @@ export default function Products () {
       try {
         const products = await fetchProducts(token);
 
-        console.log("use effect")
         dispatch(updateProducts(products))
         return 
       } catch (error) {
